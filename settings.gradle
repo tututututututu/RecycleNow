@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':db', ':core', ':mapp', ':common', ':sdn_manager', ':widget'

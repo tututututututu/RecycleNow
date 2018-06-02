@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--所有界面背景色-->
+    <color name="base_backgroundcolor">#eeeeee</color>
+
+    <!--加载界面背景色-->
+    <color name="base_loading_background">#f7f7f7</color>
+
+    <!--白色-->
+    <color name="base_white">#FFFFFF</color>
+
+    <!--透明-->
+    <color name="base_transparent">#00000000</color>
+
+    <!--橙红色-->
+    <color name="base_red">@color/base_slh_btn_red</color>
+
+    <!--黑色-->
+    <color name="base_black">#3d4245</color>
+
+    <!--半透明黑色-->
+    <color name="base_half_black">#aa000000</color>
+
+
+    <!--分割线背景色-->
+    <color name="base_line_bg">@color/base_slh_divider</color>
+
+    <!--普通字体色-->
+    <color name="base_font">@color/base_slh_text_normal</color>
+
+    <!--可点击字体色-->
+    <color name="base_font_click">@color/base_slh_text_blue</color>
+
+    <!--输入框hint颜色-->
+    <color name="base_font_hint">@color/base_slh_text_gray</color>
+
+    <!--输入框输入后字体颜色-->
+    <color name="base_font_input">@color/base_slh_text_normal</color>
+
+    <!--标题栏色-->
+    <color name="base_title_background">@color/base_white</color>
+
+    <!--状态栏颜色-->
+    <color name="base_statusbar_background">#3d4245</color>
+
+    <!--按钮不可点击颜色-->
+    <color name="base_btn_enable_false">#c8c8c8</color>
+
+    <!--字体橘色-->
+    <color name="base_slh_text_orange">#ff5500</color>
+    <!--字体正常色-->
+    <color name="base_slh_text_normal">#3d4245</color>
+    <!--字体蓝色(可点击)-->
+    <color name="base_slh_text_blue">#5eafff</color>
+    <!--字体灰色-->
+    <color name="base_slh_text_gray">#999999</color>
+    <!--分割线(中间)-->
+    <color name="base_slh_divider">#eeeeee</color>
+    <!--分割线(最后)-->
+    <color name="base_slh_divider_last">#dbdbdb</color>
+
+    <color name="_edeef1">#edeef1</color>
+
+
+    <!--按钮红色-->
+    <color name="base_slh_btn_red">#ce000d</color>
+    <!--标签橘色-->
+    <color name="base_slh_lab_orange">#ff3b30</color>
+
+    <color name="_d8d8d8">#d8d8d8</color>
+
+    <!--客户-金额和件数切换的颜色-->
+
+    <color name="customer_red">#ff3b30</color>
+    <color name="customer_gray">#999999</color>
+
+    <!--发送信息-->
+    <color name="sendmsg">#ce000d</color>
+    <color name="nosend">#c8c8c8</color>
+    <color name="_4c4c4c">#4c4c4c</color>
+    <color name="_f6a623">#F6A623</color>
+
+
+    <!--柱状图背景-->
+    <color name="rootbackground">#ffb1b1</color>
+    <!--语音确定按钮-->
+    <color name="voice_confirm">#4990e2</color>
+    <!--语音条目字体-->
+    <color name="vocie_item_textview">#8c8c8c</color>
+    <!--透明-->
+    <color name="transparent">#00ffffff</color>
+    <!--关于我们-版本信息字体颜色-->
+    <color name="version_info">#757575</color>
+    <!--意见反馈标题颜色-->
+    <color name="title_color">#b4b4b4</color>
+    <color name="user_name">#4a4a4a</color>
+    <color name="_ff6969">#ff6969</color>
+
+    <color name="unvertificate">#51c6c6</color>
+    <color name="unpicking">#29b6f6</color>
+    <color name="_ff696">#ff6969</color>
+</resources>

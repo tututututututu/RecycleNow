@@ -1,0 +1,27 @@
+<resources>
+    <string name="common_getcodewait">%1$s 秒后可重新发送</string>
+    <string name="common_wechat_share_tips">微信好友 (发送界面长按，粘贴款号信息)</string>
+    <string name="common_wechat_share_moment">朋友圈</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_select_share_type">选择分享方式</string>
+    <string name="common_no_photos">没有照片</string>
+    <string name="common_file_not_find">文件不存在</string>
+    <string name="common_upload_success">上传成功</string>
+    <string name="common_slb_links">商陆宝链接:</string>
+    <string name="get_code_again">重新获取验证码</string>
+
+    <string name="scan_barcode_title">条形码扫描</string>
+    <string name="scan_qrcode_title">二维码扫描</string>
+    <string name="scan_allcode_title">二维码或条形码扫描</string>
+    <string name="scan_barcode_hint">将条形码对入取景框，即可自动扫描</string>
+    <string name="scan_qrcode_hint">将二维码对入取景框，即可自动扫描</string>
+    <string name="scan_allcode_hint">将二维码或条形码对入取景框，即可自动扫描</string>
+    <string name="title_activity_sao_mao">SaoMaoActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="hint_input_remark_string">请输入备注</string>
+    <string name="sku_add_str">已添加到本单</string>
+    <string name="logisti_worker">配货员</string>
+
+
+</resources>

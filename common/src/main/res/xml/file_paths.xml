@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <paths>
+        <files-path
+            name="files"
+            path="." />
+        <cache-path
+            name="cache"
+            path="." />
+        <external-path
+            name="esd"
+            path="." />
+        <external-files-path
+            name="efp"
+            path="." />
+        <external-cache-path
+            name="ecp"
+            path="." />
+    </paths>
+
+</resources>

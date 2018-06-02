@@ -1,0 +1,15 @@
+<resources>
+    <string name="common_getcodewait">%1$s 秒後可重新發送</string>
+    <string name="common_wechat_share_tips">微信好友 (發送界面長按，粘貼款號信息)</string>
+    <string name="common_wechat_share_moment">朋友圈</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_select_share_type">選擇分享方式</string>
+    <string name="common_no_photos">沒有照片</string>
+    <string name="common_file_not_find">文件不存在</string>
+    <string name="common_upload_success">上傳成功</string>
+    <string name="common_slb_links">商陸寶鏈接:</string>
+    <string name="get_code_again">重新獲取驗證碼</string>
+    <string name="hint_input_remark_string">請輸入備註</string>
+    <string name="sku_add_str">已添加到本單</string>
+    <string name="logisti_worker">配貨員</string>
+</resources>

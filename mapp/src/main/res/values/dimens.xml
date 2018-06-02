@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="dp_divider">0.5dp</dimen>
+    <dimen name="dp200">200dp</dimen>>
+    <dimen name="performance_text_size">15dp</dimen>>
+    <!--客户界面金额件数切换时字体大小-->
+    <dimen name="money_size">5sp</dimen>
+    <dimen name="package_size">4sp</dimen>
+</resources>

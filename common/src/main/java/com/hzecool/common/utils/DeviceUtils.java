@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Environment;
 import android.os.PowerManager;
+import android.os.StatFs;
 import android.provider.Settings;
 
 import java.io.File;
@@ -240,5 +242,23 @@ public class DeviceUtils {
      */
     public static void reboot2Bootloader() {
         ShellUtils.execCmd("reboot bootloader", true);
+    }
+
+
+    /**
+     * 获取手机内部空间总大小
+     *
+     * @return 大小，字节为单位
+     */
+    static public long getTotalInternalMemorySize() {
+        //获取内部存储根目录
+        File path = Environment.getDataDirectory();
+        //系统的空间描述类
+        StatFs stat = new StatFs(path.getPath());
+        //每个区块占字节数
+        long blockSize = stat.getBlockSize();
+        //区块总数
+        long totalBlocks = stat.getBlockCount();
+        return (totalBlocks * blockSize)/(1024l*1024l*1024l);
     }
 }

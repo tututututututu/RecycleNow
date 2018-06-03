@@ -100,4 +100,6 @@ dependencies {
     compile ('com.gaoneng.library:autoscrollbacklayout:1.1.1'){
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
+
+    compile 'com.github.jakob-grabner:Circle-Progress-View:v1.3'
 }

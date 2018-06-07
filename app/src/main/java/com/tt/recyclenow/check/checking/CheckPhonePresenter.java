@@ -1,4 +1,4 @@
-package com.tt.recyclenow.check;
+package com.tt.recyclenow.check.checking;
 
 import com.hzecool.core.base.TBasePresenter;
 

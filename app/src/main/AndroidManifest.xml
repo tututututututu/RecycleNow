@@ -3,10 +3,10 @@
     package="com.tt.recyclenow">
 
     <application
+        android:name=".app.RealApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".app.RealApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -28,9 +28,12 @@
             android:name=".main.MainActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".check.CheckPhoneActivity"
+            android:name=".check.checking.CheckPhoneActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".check.finish.CheckingResultActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

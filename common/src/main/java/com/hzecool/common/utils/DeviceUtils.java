@@ -250,15 +250,13 @@ public class DeviceUtils {
      *
      * @return 大小，字节为单位
      */
-    static public long getTotalInternalMemorySize() {
+    static public String getTotalInternalMemorySize() {
         //获取内部存储根目录
         File path = Environment.getDataDirectory();
         //系统的空间描述类
         StatFs stat = new StatFs(path.getPath());
-        //每个区块占字节数
         long blockSize = stat.getBlockSize();
-        //区块总数
-        long totalBlocks = stat.getBlockCount();
-        return (totalBlocks * blockSize)/(1024l*1024l*1024l);
+        long totalSize = stat.getBlockCount()*blockSize;
+        return ConvertUtils.byte2FitMemorySize(totalSize);
     }
 }

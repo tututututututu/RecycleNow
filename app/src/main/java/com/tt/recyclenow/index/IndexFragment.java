@@ -7,11 +7,10 @@ import android.widget.TextView;
 
 import com.hzecool.core.base.TBaseFragment;
 import com.tt.recyclenow.R;
-import com.tt.recyclenow.check.CheckPhoneActivity;
+import com.tt.recyclenow.check.checking.CheckPhoneActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * @author tutu
@@ -30,7 +29,6 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     TextView tvSale1;
     @BindView(R.id.tv_sale)
     TextView tvSale;
-    Unbinder unbinder;
 
     @Override
     public void onLoadData(Object o) {
@@ -82,6 +80,8 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
             case R.id.tv_sale:
             case R.id.tv_sale1:
                 startActivity(intent);
+                break;
+            default:
                 break;
         }
     }

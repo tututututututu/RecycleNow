@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">即刻回收</string>
+    <string name="promise"><![CDATA[<<承诺函>>]]></string>
 </resources>

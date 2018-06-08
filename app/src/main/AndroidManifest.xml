@@ -34,6 +34,10 @@
         <activity
             android:name=".check.finish.CheckingResultActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".recyclerList.RecyclerListActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

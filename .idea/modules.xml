@@ -3,21 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RecycleNow.iml" filepath="$PROJECT_DIR$/RecycleNow.iml" />
-      <module fileurl="file://D:\project\RecycleNow\RecycleNow.iml" filepath="D:\project\RecycleNow\RecycleNow.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\project\RecycleNow\app\app.iml" filepath="D:\project\RecycleNow\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
-      <module fileurl="file://D:\project\RecycleNow\common\common.iml" filepath="D:\project\RecycleNow\common\common.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://D:\project\RecycleNow\core\core.iml" filepath="D:\project\RecycleNow\core\core.iml" />
       <module fileurl="file://$PROJECT_DIR$/db/db.iml" filepath="$PROJECT_DIR$/db/db.iml" />
-      <module fileurl="file://D:\project\RecycleNow\db\db.iml" filepath="D:\project\RecycleNow\db\db.iml" />
       <module fileurl="file://$PROJECT_DIR$/mapp/mapp.iml" filepath="$PROJECT_DIR$/mapp/mapp.iml" />
-      <module fileurl="file://D:\project\RecycleNow\mapp\mapp.iml" filepath="D:\project\RecycleNow\mapp\mapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdn_manager/sdn_manager.iml" filepath="$PROJECT_DIR$/sdn_manager/sdn_manager.iml" />
-      <module fileurl="file://D:\project\RecycleNow\sdn_manager\sdn_manager.iml" filepath="D:\project\RecycleNow\sdn_manager\sdn_manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/widget/widget.iml" filepath="$PROJECT_DIR$/widget/widget.iml" />
-      <module fileurl="file://D:\project\RecycleNow\widget\widget.iml" filepath="D:\project\RecycleNow\widget\widget.iml" />
     </modules>
   </component>
 </project>

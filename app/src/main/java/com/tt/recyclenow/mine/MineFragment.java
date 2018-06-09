@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.hzecool.core.activity.webview.JsBridgeWebViewActivity;
 import com.hzecool.core.base.TBaseFragment;
 import com.tt.recyclenow.R;
-import com.tt.recyclenow.account.AccountSettingActivity;
+import com.tt.recyclenow.account.setting.AccountSettingActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -1,18 +1,18 @@
-package com.tt.recyclenow.account;
+package com.tt.recyclenow.account.cpw;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hzecool.core.base.TBaseActivity;
+import com.tt.recyclenow.R;
 
 /**
- * @author tutu
- * @time 2018/6/9
+ * Created by tu on 2018/6/9.
  */
 
-public class AccountSettingActivity extends TBaseActivity<IAccountSettingView, AccountSettingPresenter>
-        implements IAccountSettingView {
+public class ChangePswActivity extends TBaseActivity<IChangePswView, ChangePswPresenter>
+        implements IChangePswView {
     @Override
     public void onLoadData(Object o) {
 
@@ -35,7 +35,7 @@ public class AccountSettingActivity extends TBaseActivity<IAccountSettingView, A
 
     @Override
     public int getLayoutID() {
-        return 0;
+        return R.layout.cpw_activity;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class AccountSettingActivity extends TBaseActivity<IAccountSettingView, A
     }
 
     @Override
-    protected AccountSettingPresenter createPresenter() {
-        return new AccountSettingPresenter();
+    protected ChangePswPresenter createPresenter() {
+        return new ChangePswPresenter();
     }
 }

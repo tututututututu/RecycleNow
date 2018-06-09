@@ -26,22 +26,31 @@
 
         <activity
             android:name=".main.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".check.checking.CheckPhoneActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".check.finish.CheckingResultActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".recyclerList.RecyclerListActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <activity
-            android:name=".account.AccountSettingActivity"
-            android:screenOrientation="portrait"></activity>
+            android:name=".account.setting.AccountSettingActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".account.cpw.ChangePswActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".account.login.LoginActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

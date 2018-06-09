@@ -38,6 +38,10 @@
         <activity
             android:name=".recyclerList.RecyclerListActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".account.AccountSettingActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

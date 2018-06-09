@@ -9,6 +9,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.index.IndexFragment;
+import com.tt.recyclenow.mine.MineFragment;
 
 import butterknife.BindView;
 
@@ -23,7 +24,7 @@ public class MainActivity extends TBaseActivity<IMainView, MainPresenter>
 
 
     private IndexFragment indexFragment = new IndexFragment();
-    private IndexFragment myFragment = new IndexFragment();
+    private MineFragment myFragment = new MineFragment();
 
     @Override
     public int getLayoutID() {

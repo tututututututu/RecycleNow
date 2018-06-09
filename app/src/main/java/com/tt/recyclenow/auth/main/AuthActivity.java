@@ -1,4 +1,4 @@
-package com.tt.recyclenow.auth;
+package com.tt.recyclenow.auth.main;
 
 import android.view.View;
 import android.widget.ImageView;

@@ -1,4 +1,4 @@
-package com.tt.recyclenow.auth;
+package com.tt.recyclenow.auth.main;
 
 import com.hzecool.core.base.TIBaseView;
 

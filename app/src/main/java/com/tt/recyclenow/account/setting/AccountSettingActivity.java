@@ -86,6 +86,8 @@ public class AccountSettingActivity extends TBaseActivity<IAccountSettingView, A
                 startActivity(intent);
                 finish();
                 break;
+            default:
+                break;
         }
     }
 }

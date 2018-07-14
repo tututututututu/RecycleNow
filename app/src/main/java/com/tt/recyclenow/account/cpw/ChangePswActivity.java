@@ -1,11 +1,14 @@
 package com.tt.recyclenow.account.cpw;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hzecool.common.utils.SPUtils;
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.app.Constants;
 
 /**
  * Created by tu on 2018/6/9.
@@ -40,7 +43,10 @@ public class ChangePswActivity extends TBaseActivity<IChangePswView, ChangePswPr
 
     @Override
     public void initView() {
-
+        String userName = SPUtils.getString(Constants.SP_USER_NAME);
+        if (!TextUtils.isEmpty(userName)) {
+            //edtLoginName.setText(userName);
+        }
     }
 
     @Override

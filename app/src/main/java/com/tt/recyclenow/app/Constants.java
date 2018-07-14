@@ -6,4 +6,5 @@ package com.tt.recyclenow.app;
 
 public class Constants {
     public static final String SP_TOKENDS = "tokens";
+    public static final String SP_USER_NAME = "userName";
 }

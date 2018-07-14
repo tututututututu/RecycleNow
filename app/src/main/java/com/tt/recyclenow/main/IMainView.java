@@ -1,6 +1,7 @@
 package com.tt.recyclenow.main;
 
 import com.hzecool.core.base.TIBaseView;
+import com.tt.recyclenow.bean.IndexBanner;
 
 /**
  * @author tutu

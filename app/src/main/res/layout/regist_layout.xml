@@ -55,13 +55,13 @@
             android:src="@mipmap/app_sms_code" />
 
         <com.hzecool.widget.ClearableEditText
-            android:id="@+id/edt_passWord"
+            android:id="@+id/edt_code"
             style="@style/et_style"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:hint="请输入验证码"
             android:inputType="number"
-            android:maxLength="6" />
+            android:maxLength="5" />
 
         <View
             android:layout_width="@dimen/dp_05"
@@ -106,9 +106,10 @@
         <com.hzecool.widget.ClearableEditText
             android:id="@+id/edt_psw"
             style="@style/et_style"
+            android:inputType="textPassword"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:hint="请输入密码" />
+            android:hint="请输入密码(至少6位)" />
 
     </LinearLayout>
 

@@ -15,6 +15,7 @@ import com.hzecool.core.log.L;
 import com.hzecool.core.log.LocalLogManager;
 import com.hzecool.core.manager.ActivityStack;
 import com.hzecool.core.msgcentre.MsgCentre;
+import com.hzecool.core.net.LoggingInterceptor;
 import com.hzecool.core.sp.FinalSPOperation;
 import com.hzecool.db.manager.DaoManager;
 import com.hzecool.widget.loadingLayout.LoadingLayout;
@@ -70,7 +71,7 @@ public class BaseApp extends Application {
         FinalSPOperation.initSP("finalData");
         //初始化OKgo
         OkGo.init(this);
-
+        OkGo.getInstance().addInterceptor(new LoggingInterceptor());
         //初始化路由
         initArouter();
 

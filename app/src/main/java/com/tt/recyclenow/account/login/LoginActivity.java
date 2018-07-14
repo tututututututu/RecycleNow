@@ -9,11 +9,15 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hzecool.common.utils.SPUtils;
 import com.hzecool.core.base.TBaseActivity;
 import com.hzecool.widget.ClearableEditText;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.cpw.ChangePswActivity;
 import com.tt.recyclenow.account.regist.RegisterActivity;
+import com.tt.recyclenow.app.Constants;
+import com.tt.recyclenow.bean.LoginBean;
+import com.tt.recyclenow.main.MainActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -64,6 +68,11 @@ public class LoginActivity extends TBaseActivity<ILoginView, LoginPresenter>
     public void initView() {
         edtLoginName.addTextChangedListener(textWatcher);
         edtPsw.addTextChangedListener(textWatcher);
+
+        String userName = SPUtils.getString(Constants.SP_USER_NAME);
+        if (!TextUtils.isEmpty(userName)) {
+            edtLoginName.setText(userName);
+        }
     }
 
     @Override
@@ -81,21 +90,22 @@ public class LoginActivity extends TBaseActivity<ILoginView, LoginPresenter>
         Intent intent;
         switch (view.getId()) {
             case R.id.tv_login:
-                intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                mPresenter.login();
                 break;
             case R.id.tv_forget:
                 intent = new Intent(this, ChangePswActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.tv_register:
                 intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 break;
         }
-        finish();
+
     }
 
 
@@ -129,4 +139,21 @@ public class LoginActivity extends TBaseActivity<ILoginView, LoginPresenter>
             }
         }
     };
+
+    @Override
+    public void loginOk(LoginBean rep) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public String getPhone() {
+        return edtLoginName.getText().toString().trim();
+    }
+
+    @Override
+    public String getPsw() {
+        return edtPsw.getText().toString().trim();
+    }
 }

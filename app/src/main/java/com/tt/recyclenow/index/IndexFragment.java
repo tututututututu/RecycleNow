@@ -12,7 +12,14 @@ import com.hzecool.core.base.TBaseFragment;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.login.LoginActivity;
 import com.tt.recyclenow.app.Constants;
+import com.tt.recyclenow.bean.IndexBanner;
 import com.tt.recyclenow.check.checking.CheckPhoneActivity;
+import com.tt.recyclenow.svc.GlideImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,6 +41,8 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     TextView tvSale1;
     @BindView(R.id.tv_sale)
     TextView tvSale;
+    @BindView(R.id.banner)
+    Banner banner;
 
     @Override
     public void onLoadData(Object o) {
@@ -100,5 +109,43 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
                 break;
         }
     }
+
+    @Override
+    public void BannerOk(IndexBanner indexBanner) {
+
+        List<String> imageArray = new ArrayList<>();
+
+        for (IndexBanner.DataBean dataBean : indexBanner.getData()) {
+            imageArray.add(dataBean.getImg());
+        }
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+        banner.setImageLoader(new GlideImageLoader());
+        banner.setImages(imageArray);
+        banner.setBannerTitles(imageArray);
+        banner.setOnBannerListener(position -> {
+
+        });
+
+
+        banner.setIndicatorGravity(BannerConfig.CENTER);
+        banner.setDelayTime(3000);
+        banner.start();
+    }
+
+
+    //如果你需要考虑更好的体验，可以这么操作
+    @Override
+    public void onStart() {
+        super.onStart();
+        //开始轮播
+        banner.startAutoPlay();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        //结束轮播
+        banner.stopAutoPlay();
+    }
+
 }
 

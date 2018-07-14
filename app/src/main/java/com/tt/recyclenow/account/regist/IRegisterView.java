@@ -8,4 +8,9 @@ import com.hzecool.core.base.TIBaseView;
  */
 
 public interface IRegisterView extends TIBaseView {
+    String getCode();
+    String getPhone();
+    String getPsw();
+    void registOk();
+    void getCodeOk();
 }

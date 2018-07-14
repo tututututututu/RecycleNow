@@ -27,8 +27,8 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
         implements IRegisterView {
     @BindView(R.id.edt_loginName)
     ClearableEditText edtLoginName;
-    @BindView(R.id.edt_passWord)
-    ClearableEditText edtPassWord;
+    @BindView(R.id.edt_code)
+    ClearableEditText edtCode;
     @BindView(R.id.btn_getcode)
     CountDownButton btnGetcode;
     @BindView(R.id.edt_psw)
@@ -83,6 +83,7 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_getcode:
+                mPresenter.getCode();
                 btnGetcode.start();
                 break;
             case R.id.tv_login:
@@ -95,10 +96,7 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
 
     private void onRegister() {
         if (checkRight()) {
-            // TODO: 2018/6/12 注册接口调用
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            mPresenter.register();
         } else {
             ToastUtils.showShortToast("请输入完整");
         }
@@ -107,8 +105,11 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
 
     private boolean checkRight() {
         if (TextUtils.isEmpty(edtLoginName.getText().toString().trim()) ||
-                TextUtils.isEmpty(edtPassWord.getText().toString().trim()) ||
-                TextUtils.isEmpty(edtPsw.getText().toString().trim())) {
+                TextUtils.isEmpty(edtCode.getText().toString().trim()) ||
+                TextUtils.isEmpty(edtPsw.getText().toString().trim()) ||
+                edtCode.getText().toString().trim().length() != 5 ||
+                edtPsw.getText().toString().trim().length() < 6
+                ) {
             return false;
         }
 
@@ -136,4 +137,30 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
         }
     };
 
+    @Override
+    public String getCode() {
+        return edtCode.getText().toString().trim();
+    }
+
+    @Override
+    public String getPhone() {
+        return edtLoginName.getText().toString().trim();
+    }
+
+    @Override
+    public String getPsw() {
+        return edtPsw.getText().toString().trim();
+    }
+
+    @Override
+    public void registOk() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void getCodeOk() {
+
+    }
 }

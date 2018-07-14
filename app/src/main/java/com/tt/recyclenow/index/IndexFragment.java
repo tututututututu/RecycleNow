@@ -6,14 +6,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hzecool.common.utils.DeviceUtils;
 import com.hzecool.common.utils.SPUtils;
 import com.hzecool.common.utils.ToastUtils;
+import com.hzecool.core.base.TBaseActivity;
 import com.hzecool.core.base.TBaseFragment;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.login.LoginActivity;
 import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.bean.IndexBanner;
-import com.tt.recyclenow.check.checking.CheckPhoneActivity;
+import com.tt.recyclenow.bean.PhonePriceBean;
+import com.tt.recyclenow.check.finish.CheckingResultActivity;
 import com.tt.recyclenow.svc.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -44,6 +47,8 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     @BindView(R.id.banner)
     Banner banner;
 
+    private PhonePriceBean phonePriceBean;
+
     @Override
     public void onLoadData(Object o) {
 
@@ -72,6 +77,18 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     @Override
     public void initView() {
 
+
+        String module = DeviceUtils.getModel();
+        String memory = DeviceUtils.getTotalInternalMemorySize();
+        tvModel.setText(TextUtils.isEmpty(module) ? "未知" : module);
+        tvStore.setText(TextUtils.isEmpty(memory) ? "未知" : memory + "G");
+
+        if (TextUtils.isEmpty(module) || TextUtils.isEmpty(memory)) {
+            tvPrice.setText("不支持回收");
+        } else {
+            mPresenter.getPhonePrice(DeviceUtils.getModel(), DeviceUtils.getTotalInternalMemorySize());
+        }
+
     }
 
     @Override
@@ -86,7 +103,7 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     }
 
 
-    @OnClick({R.id.tv_sale})
+    @OnClick({R.id.tv_sale, R.id.tv_sale1})
     public void onClick(View view) {
 
         String tokens = SPUtils.getString(Constants.SP_TOKENDS);
@@ -98,7 +115,13 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
             return;
         }
 
-        Intent intent = new Intent(getActivity(), CheckPhoneActivity.class);
+        if (phonePriceBean == null || null == phonePriceBean.getData()) {
+            ((TBaseActivity) getActivity()).showAlertDlg("提示", phonePriceBean.getMsg());
+            return;
+        }
+
+        Intent intent = new Intent(getActivity(), CheckingResultActivity.class);
+        intent.putExtra("price", phonePriceBean.getData().getHsprice());
 
         switch (view.getId()) {
             case R.id.tv_sale:
@@ -132,6 +155,17 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
         banner.start();
     }
 
+    @Override
+    public void PhonePriceOk(PhonePriceBean rep) {
+        this.phonePriceBean = rep;
+        tvPrice.setText(" ¥" + rep.getData().getPrice());
+    }
+
+    @Override
+    public void PhonePriceFail(PhonePriceBean rep) {
+        tvPrice.setText("不支持回收");
+    }
+
 
     //如果你需要考虑更好的体验，可以这么操作
     @Override
@@ -140,6 +174,7 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
         //开始轮播
         banner.startAutoPlay();
     }
+
     @Override
     public void onStop() {
         super.onStop();

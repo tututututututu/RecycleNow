@@ -1,6 +1,7 @@
 package com.tt.recyclenow.account.regist;
 
 import com.hzecool.core.base.TIBaseView;
+import com.tt.recyclenow.bean.LoginBean;
 
 /**
  * @author tutu
@@ -13,4 +14,6 @@ public interface IRegisterView extends TIBaseView {
     String getPsw();
     void registOk();
     void getCodeOk();
+
+    void loginOk(LoginBean rep);
 }

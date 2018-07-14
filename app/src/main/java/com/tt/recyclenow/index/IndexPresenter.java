@@ -1,13 +1,13 @@
 package com.tt.recyclenow.index;
 
-import com.hzecool.common.json.GsonUtils;
+import com.alibaba.fastjson.JSON;
 import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBasePresenter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.tt.recyclenow.app.ServerUrls;
-import com.tt.recyclenow.bean.BaseRep;
 import com.tt.recyclenow.bean.IndexBanner;
+import com.tt.recyclenow.bean.PhonePriceBean;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -23,17 +23,35 @@ public class IndexPresenter extends TBasePresenter<IIndexView> {
         getBanner();
     }
 
-    public void getBanner(){
+    public void getBanner() {
         OkGo.post(ServerUrls.ROUTER + "app/adverList.htm")
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        BaseRep rep = GsonUtils.jsonToObj(s, BaseRep.class);
-                        if (rep.getCode() == 0) {
-                            IndexBanner indexBanner = GsonUtils.jsonToObj(s,IndexBanner.class);
+                        IndexBanner indexBanner = JSON.parseObject(s, IndexBanner.class);
+                        if (indexBanner.getCode() == 0) {
                             getView().BannerOk(indexBanner);
                         } else {
-                            ToastUtils.showShortToast(rep.getMsg());
+                            ToastUtils.showShortToast(indexBanner.getMsg());
+                        }
+                    }
+                });
+    }
+
+    public void getPhonePrice(String module, String memory) {
+        OkGo.post(ServerUrls.ROUTER + "app/getPhonePrice.htm")
+                .params("xh", module)
+                .params("nc", memory)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+
+                        PhonePriceBean rep =  JSON.parseObject(s, PhonePriceBean.class);
+                        //PhonePriceBean rep = GsonUtils.jsonToObj(s, PhonePriceBean.class);
+                        if (rep.getCode() == 0) {
+                            getView().PhonePriceOk(rep);
+                        } else {
+                            getView().PhonePriceFail(rep);
                         }
                     }
                 });

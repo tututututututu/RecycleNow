@@ -12,6 +12,11 @@ import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.check.checking.CheckPhoneActivity;
 
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import at.grabner.circleprogress.CircleProgressView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -38,6 +43,13 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
     CheckBox cb;
     @BindView(R.id.tv_promise)
     TextView tvPromise;
+    @BindView(R.id.circleView)
+    CircleProgressView circleProgressView;
+    @BindView(R.id.tv_checking)
+    TextView tvChecking;
+
+    private Timer timer;
+    private int progress = 0;
 
     private int memory = 0;
     private String info = "";
@@ -71,25 +83,39 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
     public void initView() {
         tvPrice.setText("¥ " + getPrice());
         tvInfo.setText(info + " 回收价格");
+
+        startProgress();
     }
 
+    private void startProgress() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (progress >= 100) {
+                    progress = 100;
+                    timer.cancel();
+                    circleProgressView.post(() -> {
+                        tvChecking.setText("检测完成");
+                    });
+                } else {
+                    progress += randomNum();
+                    circleProgressView.post(() -> {
+                        circleProgressView.setValue(progress);
+                        tvChecking.setText("正在检测中...");
+                    });
+                }
+            }
+        }, 0, 50);
+    }
+
+    private int randomNum() {
+        Random random = new Random();
+        return random.nextInt(3);
+    }
 
     private int getPrice() {
-        if (memory > 0 && 4 <= memory) {
-            return 300;
-        } else if (memory > 4 && 8 <= memory) {
-            return 500;
-        } else if (memory > 8 && 16 <= memory) {
-            return 800;
-        } else if (memory > 16 && 32 <= memory) {
-            return 1150;
-        } else if (memory > 32 && 64 <= memory) {
-            return 1320;
-        } else if (memory > 64 && 128 <= memory) {
-            return 1580;
-        } else {
-            return 1880;
-        }
+        return getIntent().getIntExtra("price",0);
     }
 
     @Override

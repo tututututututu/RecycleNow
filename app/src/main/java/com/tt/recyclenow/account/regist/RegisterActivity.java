@@ -14,6 +14,7 @@ import com.hzecool.core.base.TBaseActivity;
 import com.hzecool.widget.ClearableEditText;
 import com.hzecool.widget.CountDownButton.CountDownButton;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.bean.LoginBean;
 import com.tt.recyclenow.main.MainActivity;
 
 import butterknife.BindView;
@@ -154,13 +155,18 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
 
     @Override
     public void registOk() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        mPresenter.login();
     }
 
     @Override
     public void getCodeOk() {
 
+    }
+
+    @Override
+    public void loginOk(LoginBean rep) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

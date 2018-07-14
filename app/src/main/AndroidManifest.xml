@@ -70,7 +70,7 @@
 
         <activity
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".account.regist.RegisterActivity"></activity>
+            android:name=".account.regist.RegisterActivity" />
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -92,7 +92,7 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".auth.main.AuthActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
     </application>
 

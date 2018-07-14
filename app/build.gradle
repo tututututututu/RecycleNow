@@ -52,4 +52,5 @@ dependencies {
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile(name: 'zzplatform_sdk', ext: 'aar')
     compile(name:'idcard_ocr', ext:'aar')
+    compile 'com.alibaba:fastjson:1.2.47'
 }

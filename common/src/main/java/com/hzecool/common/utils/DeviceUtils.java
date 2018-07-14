@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.os.PowerManager;
 import android.os.StatFs;
 import android.provider.Settings;
+import android.text.format.Formatter;
 
 import java.io.File;
 import java.net.NetworkInterface;
@@ -250,13 +251,37 @@ public class DeviceUtils {
      *
      * @return 大小，字节为单位
      */
-    static public String getTotalInternalMemorySize() {
-        //获取内部存储根目录
-        File path = Environment.getDataDirectory();
-        //系统的空间描述类
-        StatFs stat = new StatFs(path.getPath());
-        long blockSize = stat.getBlockSize();
-        long totalSize = stat.getBlockCount()*blockSize;
-        return ConvertUtils.byte2FitMemorySize(totalSize);
+    public static String getTotalInternalMemorySize() {
+        StatFs statFs = new StatFs(Environment.getDataDirectory().getPath());//调用该类来获取磁盘信息（而getDataDirectory就是内部存储）
+        long tcounts = statFs.getBlockCount();//总共的block数
+        long counts = statFs.getAvailableBlocks(); //获取可用的block数
+        long size = statFs.getBlockSize(); //每格所占的大小，一般是4KB==
+        long availROMSize = counts * size;//可用内部存储大小
+        long totalROMSize = tcounts * size; //内部存储总大小
+
+        return formatSize(totalROMSize);
     }
+
+    public static String formatSize(long size) {
+        String suffix = null;
+
+        if (size >= 1024) {
+            size /= 1024;
+            size /= 1000;
+            size /= 1000;
+        }
+        StringBuilder resultBuffer = new StringBuilder(Long.toString(size));
+
+        int commaOffset = resultBuffer.length() - 3;
+        while (commaOffset > 0) {
+            resultBuffer.insert(commaOffset, ',');
+            commaOffset -= 3;
+        }
+        if (suffix != null) {
+            resultBuffer.append(suffix);
+        }
+        return resultBuffer.toString();
+    }
+
+
 }

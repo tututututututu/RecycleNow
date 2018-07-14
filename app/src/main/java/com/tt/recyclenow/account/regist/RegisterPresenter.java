@@ -1,12 +1,15 @@
 package com.tt.recyclenow.account.regist;
 
-import com.hzecool.common.json.GsonUtils;
+import com.alibaba.fastjson.JSON;
+import com.hzecool.common.utils.SPUtils;
 import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBasePresenter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.bean.BaseRep;
+import com.tt.recyclenow.bean.LoginBean;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -28,7 +31,7 @@ public class RegisterPresenter extends TBasePresenter<IRegisterView> {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        BaseRep rep = GsonUtils.jsonToObj(s, BaseRep.class);
+                        BaseRep rep = JSON.parseObject(s, BaseRep.class);
                         if (rep.getCode() == 0) {
                             ToastUtils.showShortToast("验证码已发送");
                             getView().getCodeOk();
@@ -47,7 +50,7 @@ public class RegisterPresenter extends TBasePresenter<IRegisterView> {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        BaseRep rep = GsonUtils.jsonToObj(s, BaseRep.class);
+                        BaseRep rep = JSON.parseObject(s, BaseRep.class);
                         if (rep.getCode() == 0) {
                             ToastUtils.showShortToast(rep.getMsg());
                             getView().registOk();
@@ -58,5 +61,22 @@ public class RegisterPresenter extends TBasePresenter<IRegisterView> {
                 });
     }
 
-
+    public void login(){
+        OkGo.post(ServerUrls.ROUTER + "app/loginUser.htm")
+                .params("userPho", getView().getPhone())
+                .params("pwd", getView().getPsw())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        LoginBean rep = JSON.parseObject(s, LoginBean.class);
+                        if (rep.getCode() == 0) {
+                            getView().loginOk(rep);
+                            SPUtils.putString(Constants.SP_TOKENDS,rep.getData().getTokens());
+                            SPUtils.putString(Constants.SP_USER_NAME,rep.getData().getUserPho());
+                        } else {
+                            ToastUtils.showShortToast(rep.getMsg());
+                        }
+                    }
+                });
+    }
 }

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.hzecool.common.json.GsonUtils;
+import com.alibaba.fastjson.JSON;
 import com.hzecool.core.log.L;
 import com.hzecool.widget.materialdialog.MaterialDialog;
 import com.lzy.okgo.OkGo;
@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
                     public void onSuccess(String s, Call call, Response response) {
                         L.e(s);
 
-                        RouterBean bean = GsonUtils.jsonToObj(s, RouterBean.class);
+                        RouterBean bean = JSON.parseObject(s, RouterBean.class);
                         if (bean.getCode() == 0) {
                             ServerUrls.ROUTER = bean.getData().getUrl();
                             v.postDelayed(

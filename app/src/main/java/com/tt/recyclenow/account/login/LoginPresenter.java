@@ -1,6 +1,6 @@
 package com.tt.recyclenow.account.login;
 
-import com.hzecool.common.json.GsonUtils;
+import com.alibaba.fastjson.JSON;
 import com.hzecool.common.utils.SPUtils;
 import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBasePresenter;
@@ -30,7 +30,7 @@ public class LoginPresenter extends TBasePresenter<ILoginView>{
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        LoginBean rep = GsonUtils.jsonToObj(s, LoginBean.class);
+                        LoginBean rep = JSON.parseObject(s, LoginBean.class);
                         if (rep.getCode() == 0) {
                             getView().loginOk(rep);
                             SPUtils.putString(Constants.SP_TOKENDS,rep.getData().getTokens());

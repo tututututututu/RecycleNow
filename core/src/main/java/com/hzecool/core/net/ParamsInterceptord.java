@@ -1,17 +1,13 @@
 package com.hzecool.core.net;
 
 
-import android.text.TextUtils;
-
 import com.hzecool.app.data.AppData;
 import com.hzecool.app.data.ParamConstant;
 import com.hzecool.app.data.ServiceInterface;
-import com.hzecool.app.data.UserData;
 import com.hzecool.common.utils.AppUtils;
 import com.hzecool.common.utils.LanguageUtils;
 import com.hzecool.common.utils.TimeUtils;
 import com.hzecool.core.log.L;
-import com.hzecool.core.sp.SPOperation;
 
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -38,17 +34,6 @@ public class ParamsInterceptord implements Interceptor {
         Request original = chain.request();
         HttpUrl originalHttpUrl = original.url();
         HttpUrl.Builder builder = originalHttpUrl.newBuilder();
-
-        if (!TextUtils.isEmpty(SPOperation.getSessionId())) {
-
-            if (UserData.SLH_USER_INFO != null && "G2".equals(UserData.SLH_USER_INFO.getServerCode())
-                    && isG2Request(original)) {
-                builder.addQueryParameter(ParamConstant.SESSIONID1, SPOperation.getSessionId());
-            } else {
-                builder.addQueryParameter(ParamConstant.SESSIONID, SPOperation.getSessionId());
-            }
-
-        }
 
 
         if (AppData.productType() == AppData.PRODUCT_TYPE_SHOP_ASSISTANT) {

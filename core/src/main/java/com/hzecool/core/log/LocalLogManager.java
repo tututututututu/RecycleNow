@@ -23,7 +23,6 @@ import com.hzecool.core.base.TAbsActivity;
 import com.hzecool.core.cache.CacheManager;
 import com.hzecool.core.net.FileDownUpLoad;
 import com.hzecool.core.net.FileUploadCallBackInterface;
-import com.hzecool.core.sp.SPOperation;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -420,7 +419,6 @@ public class LocalLogManager {
             params.put(ParamConstant.MAC, PhoneUtils.getDeviceMacAddress());
         } else if (AppData.productType() == AppData.PRODUCT_TYPE_SHOP_ASSISTANT) {
             params.put(ParamConstant.PRODUCT_TYLE, ParamConstant.CLERK_ASSIST_ANDROID);
-            params.put(ParamConstant.MAC, SPOperation.getUserMobile());
         }
         params.put(ParamConstant.PRODUCT_VERSION, AppUtils.getAppVersionName());
         params.put(ParamConstant.DEVICE, Build.BRAND);

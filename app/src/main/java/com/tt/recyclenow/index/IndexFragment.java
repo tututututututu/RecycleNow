@@ -1,12 +1,17 @@
 package com.tt.recyclenow.index;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hzecool.common.utils.SPUtils;
+import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBaseFragment;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.account.login.LoginActivity;
+import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.check.checking.CheckPhoneActivity;
 
 import butterknife.BindView;
@@ -74,6 +79,16 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
 
     @OnClick({R.id.tv_sale})
     public void onClick(View view) {
+
+        String tokens = SPUtils.getString(Constants.SP_TOKENDS);
+        if (TextUtils.isEmpty(tokens)) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+            ToastUtils.showShortToast("请先登录");
+            return;
+        }
+
         Intent intent = new Intent(getActivity(), CheckPhoneActivity.class);
 
         switch (view.getId()) {

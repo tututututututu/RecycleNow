@@ -8,12 +8,10 @@ import com.hzecool.app.data.ServerUrls;
 import com.hzecool.app.data.UserData;
 import com.hzecool.common.utils.ExceptionUtils;
 import com.hzecool.common.utils.NetworkUtils;
-import com.hzecool.common.utils.PhoneUtils;
 import com.hzecool.common.utils.ResourceUtils;
 import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.R;
 import com.hzecool.core.log.L;
-import com.hzecool.core.manager.SdnManagerUtils;
 
 import java.net.SocketTimeoutException;
 
@@ -85,9 +83,9 @@ public abstract class RxSubscribe<T> extends Subscriber<T> {
     private void checkSdn() {
         if (UserData.SLH_USER_INFO != null && !TextUtils.isEmpty(UserData.SLH_USER_INFO.getSn())) {
             if (AppData.productType() == AppData.PRODUCT_TYPE_SHOP_ASSISTANT) {
-                SdnManagerUtils.startSdnCheck(UserData.SLH_USER_INFO.getSn(), UserData.SLH_USER_INFO.getErpname(), UserData.USER_PHONE);
+                //SdnManagerUtils.startSdnCheck(UserData.SLH_USER_INFO.getSn(), UserData.SLH_USER_INFO.getErpname(), UserData.USER_PHONE);
             } else {
-                SdnManagerUtils.startSdnCheck(UserData.SLH_USER_INFO.getSn(), UserData.SLH_USER_INFO.getErpname(), PhoneUtils.getDeviceMacAddress());
+                //SdnManagerUtils.startSdnCheck(UserData.SLH_USER_INFO.getSn(), UserData.SLH_USER_INFO.getErpname(), PhoneUtils.getDeviceMacAddress());
             }
         }
     }

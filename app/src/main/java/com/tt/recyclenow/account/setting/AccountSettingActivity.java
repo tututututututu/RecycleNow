@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.hzecool.common.utils.AppUtils;
 import com.hzecool.core.base.TBaseActivity;
-import com.hzecool.core.sp.SPOperation;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.cpw.ChangePswActivity;
 import com.tt.recyclenow.account.login.LoginActivity;
@@ -75,13 +74,15 @@ public class AccountSettingActivity extends TBaseActivity<IAccountSettingView, A
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_change_psw:
-                SPOperation.clearSp();
+                // TODO: 2018/7/14 清楚用户信息
+                //SPOperation.clearSp();
                 Intent intent1 = new Intent(this, ChangePswActivity.class);
                 startActivity(intent1);
                 finish();
                 break;
             case R.id.tv_logout:
-                SPOperation.clearSp();
+                // TODO: 2018/7/14 清楚用户信息 
+                //SPOperation.clearSp();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();

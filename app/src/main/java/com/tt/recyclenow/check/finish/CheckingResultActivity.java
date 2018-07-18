@@ -7,10 +7,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.activity.webview.JsBridgeWebViewActivity;
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
-import com.tt.recyclenow.check.checking.CheckPhoneActivity;
+import com.tt.recyclenow.auth.main.AuthActivity;
+import com.tt.recyclenow.bean.AuthStatusBean;
+import com.tt.recyclenow.recyclerList.RecyclerListActivity;
 
 import java.util.Random;
 import java.util.Timer;
@@ -54,6 +57,8 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
     private int memory = 0;
     private String info = "";
 
+    private AuthStatusBean authStatusBean;
+
     @Override
     public void onLoadData(Object o) {
 
@@ -81,9 +86,7 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
 
     @Override
     public void initView() {
-        tvPrice.setText("¥ " + getPrice());
         tvInfo.setText(info + " 回收价格");
-
         startProgress();
     }
 
@@ -96,11 +99,13 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                     progress = 100;
                     timer.cancel();
                     circleProgressView.post(() -> {
+                        tvPrice.setText("¥ " + getPrice());
                         tvChecking.setText("检测完成");
                     });
                 } else {
                     progress += randomNum();
                     circleProgressView.post(() -> {
+                        tvPrice.setText("¥ " + randomPrice());
                         circleProgressView.setValue(progress);
                         tvChecking.setText("正在检测中...");
                     });
@@ -114,8 +119,13 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
         return random.nextInt(3);
     }
 
+    private int randomPrice() {
+        Random random = new Random();
+        return random.nextInt(10000);
+    }
+
     private int getPrice() {
-        return getIntent().getIntExtra("price",0);
+        return getIntent().getIntExtra("price", 0);
     }
 
     @Override
@@ -134,16 +144,36 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_recheck:
-                intent = new Intent(this, CheckPhoneActivity.class);
-                startActivity(intent);
+                timer.cancel();
+                progress = 0;
+                startProgress();
                 break;
             case R.id.tv_sale:
-                intent = new Intent(this, CheckPhoneActivity.class);
-                startActivity(intent);
+                ToastUtils.showShortToast("功能即将开放");
                 break;
             case R.id.tv_sale_use:
-                intent = new Intent(this, CheckPhoneActivity.class);
-                startActivity(intent);
+                if (cb.isChecked()) {
+                    if (authStatusBean != null) {
+                        if (authStatusBean.getData().needAuth()) {
+                            /**
+                             * 需要继续认证
+                             */
+                            Intent intent1 = new Intent(this, AuthActivity.class);
+                            intent1.putExtra("auth", this.authStatusBean);
+                            startActivity(intent1);
+                        } else {
+                            /**
+                             * 已经认证过了
+                             */
+                            Intent intent1 = new Intent(this, RecyclerListActivity.class);
+                            startActivity(intent1);
+                        }
+                    } else {
+                        ToastUtils.showShortToast("请求失败");
+                    }
+                } else {
+                    ToastUtils.showShortToast("请勾选承诺函");
+                }
                 break;
             case R.id.tv_promise:
                 intent = new Intent(this, JsBridgeWebViewActivity.class);
@@ -153,5 +183,10 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                 break;
         }
 
+    }
+
+    @Override
+    public void onAuthStatusOk(AuthStatusBean bean) {
+        this.authStatusBean = bean;
     }
 }

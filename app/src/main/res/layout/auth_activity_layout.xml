@@ -37,7 +37,8 @@
                 android:layout_toRightOf="@id/iv"
                 android:text="实名认证" />
 
-            <TextView
+            <CheckedTextView
+                android:id="@+id/tv_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -68,13 +69,15 @@
                 android:layout_toRightOf="@id/iv1"
                 android:text="个人信息" />
 
-            <TextView
+            <CheckedTextView
+                android:id="@+id/tv_gr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证" />
+                android:text="已认证"
+                android:textAlignment="center" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -99,100 +102,8 @@
                 android:layout_toRightOf="@id/iv2"
                 android:text="手机认证" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:text="已认证" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl4"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white">
-
-            <ImageView
-                android:id="@+id/iv3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:src="@mipmap/alipay_press" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv3"
-                android:text="支付宝认证" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:text="已认证" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl5"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white">
-
-            <ImageView
-                android:id="@+id/iv4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:src="@mipmap/alipay_press" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv4"
-                android:text="地理位置" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:text="已认证" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl6"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white">
-
-            <ImageView
-                android:id="@+id/iv5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:src="@mipmap/alipay_press" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv5"
-                android:text="通讯录" />
-
-            <TextView
+            <CheckedTextView
+                android:id="@+id/tv_sj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -223,7 +134,40 @@
                 android:layout_toRightOf="@id/iv6"
                 android:text="淘宝认证" />
 
+            <CheckedTextView
+                android:id="@+id/tv_tb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:text="已认证" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl8"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/iv7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:src="@mipmap/alipay_press" />
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/iv7"
+                android:text="学信认证" />
+
+            <CheckedTextView
+                android:id="@+id/tv_xx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

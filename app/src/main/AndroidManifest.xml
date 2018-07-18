@@ -34,43 +34,43 @@
 
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".main.MainActivity"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".check.checking.CheckPhoneActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".check.finish.CheckingResultActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".recyclerList.RecyclerListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".account.setting.AccountSettingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".account.cpw.ChangePswActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".account.login.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".account.regist.RegisterActivity" />
+            android:name=".account.regist.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -90,10 +90,16 @@
         </provider>
 
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".auth.main.AuthActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <activity
+            android:name=".auth.person.PersonInfoAuthActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

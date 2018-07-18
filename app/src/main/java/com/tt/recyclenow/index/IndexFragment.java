@@ -80,13 +80,14 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
 
         String module = DeviceUtils.getModel();
         String memory = DeviceUtils.getTotalInternalMemorySize();
-        tvModel.setText(TextUtils.isEmpty(module) ? "未知" : module);
-        tvStore.setText(TextUtils.isEmpty(memory) ? "未知" : memory + "G");
+        tvModel.setText(TextUtils.isEmpty(module) ? "型号:" + "未知" : "型号:" + module);
+        tvStore.setText(TextUtils.isEmpty(memory) ? "内存:" + "未知" : "内存:" + memory + "G");
 
         if (TextUtils.isEmpty(module) || TextUtils.isEmpty(memory)) {
             tvPrice.setText("不支持回收");
         } else {
-            mPresenter.getPhonePrice(DeviceUtils.getModel(), DeviceUtils.getTotalInternalMemorySize());
+            mPresenter.getPhonePrice("iphone 6", "16");
+            //mPresenter.getPhonePrice(DeviceUtils.getModel(), DeviceUtils.getTotalInternalMemorySize());
         }
 
     }
@@ -164,6 +165,8 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     @Override
     public void PhonePriceFail(PhonePriceBean rep) {
         tvPrice.setText("不支持回收");
+        tvSale.setEnabled(false);
+        tvSale1.setEnabled(false);
     }
 
 

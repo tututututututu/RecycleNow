@@ -1,11 +1,14 @@
 package com.tt.recyclenow.auth.main;
 
-import android.graphics.Bitmap;
-import android.util.Base64;
+import android.content.Intent;
 import android.view.View;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.hzecool.app.bean.app.ARouterUrl;
 import com.hzecool.core.base.TBaseActivity;
 import com.megvii.faceid.zzplatform.sdk.config.UserConfig;
 import com.megvii.faceid.zzplatform.sdk.listener.AccessCallBackListener;
@@ -17,9 +20,9 @@ import com.megvii.faceidiol.sdk.manager.IDCardManager;
 import com.megvii.faceidiol.sdk.manager.IDCardResult;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.auth.GenerateSign;
+import com.tt.recyclenow.bean.AuthStatusBean;
 
-import java.io.ByteArrayOutputStream;
-
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -29,6 +32,39 @@ import butterknife.OnClick;
 
 public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
         implements IAuthView, IDCardDetectListener, MegLiveDetectListener, MegLiveRecordVideoListener {
+    @BindView(R.id.tv_sm)
+    CheckedTextView tvSm;
+    @BindView(R.id.rl1)
+    RelativeLayout rl1;
+    @BindView(R.id.iv1)
+    ImageView iv1;
+    @BindView(R.id.tv_gr)
+    CheckedTextView tvGr;
+    @BindView(R.id.rl2)
+    RelativeLayout rl2;
+    @BindView(R.id.iv3)
+    ImageView iv3;
+    @BindView(R.id.iv2)
+    ImageView iv2;
+    @BindView(R.id.tv_sj)
+    CheckedTextView tvSj;
+    @BindView(R.id.rl3)
+    RelativeLayout rl3;
+    @BindView(R.id.iv6)
+    ImageView iv6;
+    @BindView(R.id.tv_tb)
+    CheckedTextView tvTb;
+    @BindView(R.id.rl7)
+    RelativeLayout rl7;
+    @BindView(R.id.iv7)
+    ImageView iv7;
+    @BindView(R.id.tv_xx)
+    CheckedTextView tvXx;
+    @BindView(R.id.rl8)
+    RelativeLayout rl8;
+    @BindView(R.id.ctv_next)
+    CheckedTextView ctvNext;
+
     private long mDoubleClickTime = 0L;
     private static final String apiKey = "PVrbAEaNsjCXd-ImwrlKReFiaVWBsKed";
     private static final String secret = "zUK5XVzHqjDUOtlaTxitb5u8iOEB_Qzb";
@@ -40,6 +76,8 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
     private String mName;
     private String mNum;
 
+    private AuthStatusBean authStatusBean;
+
     @Override
     public int getLayoutID() {
         return R.layout.auth_activity_layout;
@@ -47,6 +85,27 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
 
     @Override
     public void initView() {
+        authStatusBean = getIntent().getParcelableExtra("auth");
+        if (authStatusBean == null) {
+            return;
+        }
+
+        if ("0".equals(authStatusBean.getData().getPhonexs())) {
+            rl3.setVisibility(View.VISIBLE);
+        } else {
+            rl3.setVisibility(View.GONE);
+        }
+        if ("0".equals(authStatusBean.getData().getTbxs())) {
+            rl7.setVisibility(View.VISIBLE);
+        } else {
+            rl7.setVisibility(View.GONE);
+        }
+        if ("0".equals(authStatusBean.getData().getXxxs())) {
+            rl8.setVisibility(View.VISIBLE);
+        } else {
+            rl8.setVisibility(View.GONE);
+        }
+
         IDCardManager.getInstance().setIdCardDetectListener(AuthActivity.this);
         FaceppManager.getInstance(this).setMegLiveDetectListener(this);
         FaceppManager.getInstance(this).setMegLiveRecordVideoListener(this);
@@ -82,8 +141,9 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
 
     }
 
-    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl5, R.id.rl6, R.id.rl7, R.id.ctv_next})
+    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3,R.id.rl7, R.id.ctv_next})
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.rl1:
                 idCardAuth();
@@ -91,14 +151,22 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
             case R.id.rl2:
                 break;
             case R.id.rl3:
-                break;
-            case R.id.rl4:
-                break;
-            case R.id.rl5:
-                break;
-            case R.id.rl6:
+                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
+                        .withString("url", authStatusBean.getData().getPhoneUrl())
+                        .withString("title", "手机认证")
+                        .navigation(this);
                 break;
             case R.id.rl7:
+                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
+                        .withString("url", authStatusBean.getData().getTbUrl())
+                        .withString("title", "淘宝认证")
+                        .navigation(this);
+                break;
+            case R.id.rl8:
+                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
+                        .withString("url", authStatusBean.getData().getXxUrl())
+                        .withString("title", "学信认证")
+                        .navigation(this);
                 break;
             default:
                 break;

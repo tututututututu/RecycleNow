@@ -181,12 +181,13 @@ public class DeviceUtils {
      */
     public static String getModel() {
         String model = Build.MODEL;
+        String made = Build.MANUFACTURER;
         if (model != null) {
             model = model.trim().replaceAll("\\s*", "");
         } else {
             model = "";
         }
-        return model;
+        return made + " " + model;
     }
 
     /**

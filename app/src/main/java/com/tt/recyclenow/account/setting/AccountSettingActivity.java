@@ -7,7 +7,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hzecool.common.utils.AppUtils;
+import com.hzecool.common.utils.SPUtils;
 import com.hzecool.core.base.TBaseActivity;
+import com.hzecool.core.manager.ActivityStack;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.cpw.ChangePswActivity;
 import com.tt.recyclenow.account.login.LoginActivity;
@@ -31,7 +33,10 @@ public class AccountSettingActivity extends TBaseActivity<IAccountSettingView, A
 
     @Override
     public void onLoadData(Object o) {
-
+        SPUtils.clear();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        ActivityStack.finishAll();
     }
 
     @Override
@@ -81,11 +86,7 @@ public class AccountSettingActivity extends TBaseActivity<IAccountSettingView, A
                 finish();
                 break;
             case R.id.tv_logout:
-                // TODO: 2018/7/14 清楚用户信息 
-                //SPOperation.clearSp();
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                mPresenter.logout();
                 break;
             default:
                 break;

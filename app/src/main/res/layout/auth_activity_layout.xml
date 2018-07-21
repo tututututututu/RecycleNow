@@ -38,13 +38,13 @@
                 android:text="实名认证" />
 
             <CheckedTextView
+                android:text="未认证"
                 android:id="@+id/tv_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证"
                 android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
@@ -78,7 +78,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证"
                 android:textAlignment="center"
                 android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
@@ -113,7 +112,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证"
                 android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
@@ -147,7 +145,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证"
                 android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
@@ -181,7 +178,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证"
                 android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 

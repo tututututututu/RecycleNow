@@ -98,8 +98,16 @@
             android:name=".auth.person.PersonInfoAuthActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         </activity>
+
+        <activity
+            android:name=".auth.idcard.IDCardActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
     </application>
 
 </manifest>

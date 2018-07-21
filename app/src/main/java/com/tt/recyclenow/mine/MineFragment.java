@@ -5,16 +5,20 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hzecool.common.utils.SPUtils;
 import com.hzecool.core.activity.webview.JsBridgeWebViewActivity;
 import com.hzecool.core.base.TBaseFragment;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.account.login.LoginActivity;
 import com.tt.recyclenow.account.setting.AccountSettingActivity;
+import com.tt.recyclenow.app.Constants;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,7 +30,6 @@ import butterknife.OnClick;
 
 public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
         implements IMineView {
-
 
     @BindView(R.id.civ)
     ImageView civ;
@@ -46,6 +49,8 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
     ImageView iv4;
     @BindView(R.id.rl4)
     RelativeLayout rl4;
+    @BindView(R.id.tv_name)
+    TextView tvName;
 
     @Override
     public int getLayoutID() {
@@ -54,7 +59,11 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
 
     @Override
     public void initView() {
-
+        if (!TextUtils.isEmpty(SPUtils.getString(Constants.SP_USER_NAME))) {
+            tvName.setText(SPUtils.getString(Constants.SP_USER_NAME));
+        } else {
+            tvName.setText("请登录");
+        }
     }
 
     @Override
@@ -92,8 +101,14 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
         Intent intent;
         switch (v.getId()) {
             case R.id.rl1:
-                intent = new Intent(getActivity(), AccountSettingActivity.class);
-                startActivity(intent);
+
+                if (TextUtils.isEmpty(SPUtils.getString(Constants.SP_TOKENDS))) {
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(getActivity(), AccountSettingActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl2:
                 /**

@@ -8,4 +8,5 @@ import com.hzecool.core.base.TIBaseView;
  */
 
 public interface IIDCardView extends TIBaseView{
+    void onAuthOk();
 }

@@ -99,12 +99,16 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                     progress = 100;
                     timer.cancel();
                     circleProgressView.post(() -> {
+                        tvRecheck.setEnabled(true);
+                        tvSaleUse.setEnabled(true);
                         tvPrice.setText("¥ " + getPrice());
                         tvChecking.setText("检测完成");
                     });
                 } else {
                     progress += randomNum();
                     circleProgressView.post(() -> {
+                        tvRecheck.setEnabled(false);
+                        tvSaleUse.setEnabled(false);
                         tvPrice.setText("¥ " + randomPrice());
                         circleProgressView.setValue(progress);
                         tvChecking.setText("正在检测中...");

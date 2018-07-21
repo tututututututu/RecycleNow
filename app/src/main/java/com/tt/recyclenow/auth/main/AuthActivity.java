@@ -18,9 +18,14 @@ import com.megvii.faceid.zzplatform.sdk.manager.MegLiveRecordVideoListener;
 import com.megvii.faceidiol.sdk.manager.IDCardDetectListener;
 import com.megvii.faceidiol.sdk.manager.IDCardManager;
 import com.megvii.faceidiol.sdk.manager.IDCardResult;
+import com.megvii.faceidiol.sdk.manager.UserDetectConfig;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.auth.GenerateSign;
 import com.tt.recyclenow.bean.AuthStatusBean;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,34 +47,31 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
     CheckedTextView tvGr;
     @BindView(R.id.rl2)
     RelativeLayout rl2;
-    @BindView(R.id.iv3)
-    ImageView iv3;
     @BindView(R.id.iv2)
     ImageView iv2;
     @BindView(R.id.tv_sj)
     CheckedTextView tvSj;
     @BindView(R.id.rl3)
     RelativeLayout rl3;
-    @BindView(R.id.iv6)
-    ImageView iv6;
+    @BindView(R.id.iv4)
+    ImageView iv4;
     @BindView(R.id.tv_tb)
     CheckedTextView tvTb;
-    @BindView(R.id.rl7)
-    RelativeLayout rl7;
-    @BindView(R.id.iv7)
-    ImageView iv7;
+    @BindView(R.id.rl4)
+    RelativeLayout rl4;
+    @BindView(R.id.iv5)
+    ImageView iv5;
     @BindView(R.id.tv_xx)
     CheckedTextView tvXx;
-    @BindView(R.id.rl8)
-    RelativeLayout rl8;
+    @BindView(R.id.rl5)
+    RelativeLayout rl5;
     @BindView(R.id.ctv_next)
     CheckedTextView ctvNext;
-
     private long mDoubleClickTime = 0L;
     private static final String apiKey = "PVrbAEaNsjCXd-ImwrlKReFiaVWBsKed";
     private static final String secret = "zUK5XVzHqjDUOtlaTxitb5u8iOEB_Qzb";
 
-
+    private UserDetectConfig config = new UserDetectConfig();
     /**
      * 活体检测人用户的名字,身份证号码
      */
@@ -85,30 +87,67 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
 
     @Override
     public void initView() {
+
+        config.setCaptureImage(0);
+        config.setScreenDirection(0);
         authStatusBean = getIntent().getParcelableExtra("auth");
         if (authStatusBean == null) {
             return;
         }
 
+        updateView();
+
+        IDCardManager.getInstance().setIdCardDetectListener(AuthActivity.this);
+        FaceppManager.getInstance(this).setMegLiveDetectListener(this);
+        FaceppManager.getInstance(this).setMegLiveRecordVideoListener(this);
+    }
+
+    private void updateView() {
         if ("0".equals(authStatusBean.getData().getPhonexs())) {
             rl3.setVisibility(View.VISIBLE);
         } else {
             rl3.setVisibility(View.GONE);
         }
         if ("0".equals(authStatusBean.getData().getTbxs())) {
-            rl7.setVisibility(View.VISIBLE);
+            rl4.setVisibility(View.VISIBLE);
         } else {
-            rl7.setVisibility(View.GONE);
+            rl4.setVisibility(View.GONE);
         }
         if ("0".equals(authStatusBean.getData().getXxxs())) {
-            rl8.setVisibility(View.VISIBLE);
+            rl5.setVisibility(View.VISIBLE);
         } else {
-            rl8.setVisibility(View.GONE);
+            rl5.setVisibility(View.GONE);
         }
 
-        IDCardManager.getInstance().setIdCardDetectListener(AuthActivity.this);
-        FaceppManager.getInstance(this).setMegLiveDetectListener(this);
-        FaceppManager.getInstance(this).setMegLiveRecordVideoListener(this);
+        if ("1".equals(authStatusBean.getData().getNameMark())) {
+            tvSm.setChecked(true);
+        } else {
+            tvSm.setChecked(false);
+        }
+
+        if ("1".equals(authStatusBean.getData().getGrMark())) {
+            tvGr.setChecked(true);
+        } else {
+            tvGr.setChecked(false);
+        }
+
+        if ("1".equals(authStatusBean.getData().getPhoneMark())) {
+            tvSj.setChecked(true);
+        } else {
+            tvSj.setChecked(false);
+        }
+
+        if ("1".equals(authStatusBean.getData().getTbMark())) {
+            tvTb.setChecked(true);
+        } else {
+            tvTb.setChecked(false);
+        }
+
+        if ("1".equals(authStatusBean.getData().getXxMark())) {
+            tvXx.setChecked(true);
+        } else {
+            tvXx.setChecked(false);
+        }
     }
 
     @Override
@@ -141,7 +180,7 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
 
     }
 
-    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3,R.id.rl7, R.id.ctv_next})
+    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl5, R.id.ctv_next})
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
@@ -151,20 +190,21 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
             case R.id.rl2:
                 break;
             case R.id.rl3:
-                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
-                        .withString("url", authStatusBean.getData().getPhoneUrl())
-                        .withString("title", "手机认证")
-                        .navigation(this);
+                mPresenter.getUrl(authStatusBean.getData().getPhoneUrl());
+//                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
+//                        .withString("url", ServerUrls.ROUTER + authStatusBean.getData().getPhoneUrl()+"&tokens="+ SPUtils.getString(Constants.SP_TOKENDS))
+//                        .withString("title", "手机认证")
+//                        .navigation(this);
                 break;
-            case R.id.rl7:
+            case R.id.rl4:
                 ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
-                        .withString("url", authStatusBean.getData().getTbUrl())
+                        .withString("url", ServerUrls.ROUTER + authStatusBean.getData().getTbUrl())
                         .withString("title", "淘宝认证")
                         .navigation(this);
                 break;
-            case R.id.rl8:
+            case R.id.rl5:
                 ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
-                        .withString("url", authStatusBean.getData().getXxUrl())
+                        .withString("url", ServerUrls.ROUTER + authStatusBean.getData().getXxUrl())
                         .withString("title", "学信认证")
                         .navigation(this);
                 break;
@@ -182,7 +222,7 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
             long currtTime = System.currentTimeMillis() / 1000;
             long expireTime = System.currentTimeMillis() / 1000 + 60 * 60 * 24;
             String sign = GenerateSign.appSign(apiKey, secret, currtTime, expireTime);
-            IDCardManager.getInstance().init(AuthActivity.this, sign, "hmac_sha1", new IDCardManager.InitCallBack() {
+            IDCardManager.getInstance().init(AuthActivity.this, sign, "hmac_sha1", config, new IDCardManager.InitCallBack() {
                 @Override
                 public void initSuccess(String bizToken) {
                     IDCardManager.getInstance().startDetect(AuthActivity.this, bizToken, "");
@@ -263,10 +303,14 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
             /**
              * 同一个人
              */
+            Map<String,String> params = new HashMap<>();
+            params.put("sfzzmImg","");
+            mPresenter.smAuth(params);
         } else if (i == 2000) {
             /**
              * 不是同一个人
              */
+            showAlertDlg("校验失败,人脸识别和身份证不是同一个人,请重新检测", s);
         } else {
             showAlertDlg("提示", s);
         }
@@ -277,5 +321,10 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
         /**
          * 活体检测人脸对比 视频地址
          */
+    }
+
+    @Override
+    public void onAuthStatusOk(AuthStatusBean bean) {
+        this.authStatusBean = bean;
     }
 }

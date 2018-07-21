@@ -44,13 +44,15 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证" />
+                android:text="已认证"
+                android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <ImageView
@@ -77,13 +79,15 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
                 android:text="已认证"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl3"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <ImageView
@@ -109,17 +113,19 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证" />
+                android:text="已认证"
+                android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl7"
+            android:id="@+id/rl4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <ImageView
-                android:id="@+id/iv6"
+                android:id="@+id/iv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -131,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv6"
+                android:layout_toRightOf="@id/iv4"
                 android:text="淘宝认证" />
 
             <CheckedTextView
@@ -141,17 +147,19 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证" />
+                android:text="已认证"
+                android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl8"
+            android:id="@+id/rl5"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/white">
 
             <ImageView
-                android:id="@+id/iv7"
+                android:id="@+id/iv5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -163,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv7"
+                android:layout_toRightOf="@id/iv5"
                 android:text="学信认证" />
 
             <CheckedTextView
@@ -173,13 +181,14 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="已认证" />
+                android:text="已认证"
+                android:textColor="@color/auth_text_check_color" />
         </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl7"
+            android:layout_below="@+id/rl5"
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="温馨提示:填写真实有效的信息,急速回收" />

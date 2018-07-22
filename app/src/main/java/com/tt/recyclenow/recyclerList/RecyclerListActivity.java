@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.bean.RecycleBean;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -26,7 +29,7 @@ public class RecyclerListActivity extends TBaseActivity<IRecyclerListView, Recyc
 
     @Override
     public void onLoadData(Object o) {
-
+        adapter.setNewData((List<RecycleBean.DataBean>) o);
     }
 
     @Override
@@ -36,7 +39,7 @@ public class RecyclerListActivity extends TBaseActivity<IRecyclerListView, Recyc
 
     @Override
     public void onLoadError(String msg) {
-
+        showAlertDlg("提示", msg);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class RecyclerListActivity extends TBaseActivity<IRecyclerListView, Recyc
 
     @Override
     public void initTitle(ImageView ivBack, TextView tvBack, View llBack, TextView titleName, TextView tvMenu, View titleRoot) {
-
+        titleName.setText("商家报价");
     }
 
     @Override

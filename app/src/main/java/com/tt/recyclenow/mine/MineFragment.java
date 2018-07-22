@@ -19,6 +19,7 @@ import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.login.LoginActivity;
 import com.tt.recyclenow.account.setting.AccountSettingActivity;
 import com.tt.recyclenow.app.Constants;
+import com.tt.recyclenow.recycleHistory.HistoryActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -96,7 +97,7 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
 
     }
 
-    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4})
+    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl_history})
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
@@ -122,6 +123,10 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
                 break;
             case R.id.rl4:
                 requestUpdate();
+                break;
+            case R.id.rl_history:
+                intent = new Intent(getActivity(), HistoryActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

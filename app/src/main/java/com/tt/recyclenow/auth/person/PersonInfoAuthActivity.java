@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.common.utils.Utils;
 import com.hzecool.core.base.TBaseActivity;
 import com.hzecool.widget.materialdialog.MaterialDialog;
@@ -20,9 +21,13 @@ import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.auth.person.gps.LocationHelper;
+import com.tt.recyclenow.bean.PersonAuthBean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -93,13 +98,22 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
     EditText et11;
     @BindView(R.id.tv_finish)
     TextView tvFinish;
-
+    @BindView(R.id.et_qq)
+    EditText etQQ;
+    @BindView(R.id.et_wx)
+    EditText etWX;
 
     CityPickerView mPicker = new CityPickerView();
+    private LocationHelper locationHelper;
+
+    private String sheng;
+    private String shi;
+    private String qu;
 
     @Override
     public void onLoadData(Object o) {
-
+        ToastUtils.showShortToast("认证成功");
+        finish();
     }
 
     @Override
@@ -109,7 +123,7 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
 
     @Override
     public void onLoadError(String msg) {
-
+        showAlertDlg("提示", msg);
     }
 
     @Override
@@ -136,7 +150,7 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
 
     @Override
     public void initTitle(ImageView ivBack, TextView tvBack, View llBack, TextView titleName, TextView tvMenu, View titleRoot) {
-
+        titleName.setText("个人信息");
     }
 
     @Override
@@ -144,31 +158,61 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
         return new PersonInfoAuthPresenter();
     }
 
-
-    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl5, R.id.rl6, R.id.rl9})
+    @OnClick({R.id.rl1, R.id.et1, R.id.rl2, R.id.et2, R.id.rl3, R.id.et3, R.id.rl5,
+            R.id.et5, R.id.rl6, R.id.et6, R.id.rl9, R.id.et9, R.id.tv_finish})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl1:
+            case R.id.et1:
                 zhufang();
                 break;
             case R.id.rl2:
+            case R.id.et2:
                 wenhua();
                 break;
             case R.id.rl3:
+            case R.id.et3:
                 dizhi();
                 break;
             case R.id.rl5:
+            case R.id.et5:
                 juzhushichang();
                 break;
             case R.id.rl6:
+            case R.id.et6:
                 lianxiren1guanxi();
                 break;
             case R.id.rl9:
+            case R.id.et9:
                 lianxiren2guanxi();
+                break;
+            case R.id.tv_finish:
+                mPresenter.upLoadData(wrapParams());
                 break;
             default:
                 break;
         }
+    }
+
+    private Map<String, String> wrapParams() {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("userEmail", etWX.getText().toString().trim());
+        params.put("userQq", etQQ.getText().toString().trim());
+        params.put("zn", et1.getText().toString().trim());
+        params.put("xl", et2.getText().toString().trim());
+        params.put("jh", et5.getText().toString().trim());
+        params.put("bz1", sheng);
+        params.put("bz2", shi);
+        params.put("bz3", qu);
+        params.put("userAddr", et4.getText().toString().trim());
+        params.put("qsgx", et6.getText().toString().trim());
+        params.put("gxname", et7.getText().toString().trim());
+        params.put("qsgxtel", et8.getText().toString().trim());
+        params.put("sjgx1", et9.getText().toString().trim());
+        params.put("gxname1", et10.getText().toString().trim());
+        params.put("sjgxtel1", et11.getText().toString().trim());
+        return params;
     }
 
     private void dizhi() {
@@ -178,20 +222,27 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
         mPicker.setOnCityItemClickListener(new OnCityItemClickListener() {
             @Override
             public void onSelected(ProvinceBean province, CityBean city, DistrictBean district) {
+
+                StringBuilder sb = new StringBuilder();
                 //省份
                 if (province != null) {
-
+                    sb.append(province.getName());
+                    sheng = province.getName();
                 }
 
                 //城市
                 if (city != null) {
-
+                    sb.append(city.getName());
+                    shi = city.getName();
                 }
 
                 //地区
                 if (district != null) {
-
+                    sb.append(district.getName());
+                    qu = district.getName();
                 }
+
+                et3.setText(sb.toString());
             }
 
             @Override
@@ -212,7 +263,7 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
                 .title("第二联系人")
                 .items(items)
                 .itemsCallbackSingleChoice(-1, (dialog, view, which, text) -> {
-
+                    et9.setText(text);
                     return true;
                 })
                 .positiveText("确定")
@@ -229,7 +280,7 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
                 .title("第一联系人")
                 .items(items)
                 .itemsCallbackSingleChoice(-1, (dialog, view, which, text) -> {
-
+                    et6.setText(text);
                     return true;
                 })
                 .positiveText("确定")
@@ -247,7 +298,7 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
                 .title("居住时长情况")
                 .items(items)
                 .itemsCallbackSingleChoice(-1, (dialog, view, which, text) -> {
-
+                    et5.setText(text);
                     return true;
                 })
                 .positiveText("确定")
@@ -267,7 +318,7 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
                 .title("学历情况")
                 .items(items)
                 .itemsCallbackSingleChoice(-1, (dialog, view, which, text) -> {
-
+                    et2.setText(text);
                     return true;
                 })
                 .positiveText("确定")
@@ -286,33 +337,54 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
                 .title("住房情况")
                 .items(items)
                 .itemsCallbackSingleChoice(-1, (dialog, view, which, text) -> {
-
+                    et1.setText(text);
                     return true;
                 })
                 .positiveText("确定")
                 .show();
     }
 
-    /**
-     * 通讯录认证
-     *
-     * @param card
-     */
-    public void requestPermissionContact(final String card) {
+    @Override
+    public void requestPermision() {
         RxPermissions rxPermissions = new RxPermissions(this);
 
         rxPermissions.request(
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_CONTACTS
         )
+//                .subscribe()
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
-                        mPresenter.getContacts();
+                        locationHelper = new LocationHelper(getApplicationContext());
+                        locationHelper.initLocation();
+                        mPresenter.permissionOk();
                     } else {
                         Toast.makeText(Utils.getContext(), "没有获取到需要的权限", Toast.LENGTH_SHORT).show();
-
                     }
                 });
+    }
 
+    @Override
+    public void reFillData(PersonAuthBean rep) {
+        PersonAuthBean.DataBean data = rep.getData();
+        if (data!=null){
+            et1.setText(data.getZn());
+            et2.setText(data.getXl());
+            et3.setText(data.getBz1()+data.getBz2()+data.getBz3());
+            et4.setText(data.getUserAddr());
+            et5.setText(data.getJh());
+            et6.setText(data.getQsgx());
+            et7.setText(data.getGxname());
+            et8.setText(data.getQsgxtel());
+            et9.setText(data.getSjgx1());
+            et10.setText(data.getGxname1());
+            et11.setText(data.getSjgxtel1());
+            etQQ.setText(data.getUserQq());
+            etWX.setText(data.getUserEmail());
+            this.sheng = data.getBz1();
+            this.shi = data.getBz2();
+            this.qu = data.getBz3();
+        }
     }
 }

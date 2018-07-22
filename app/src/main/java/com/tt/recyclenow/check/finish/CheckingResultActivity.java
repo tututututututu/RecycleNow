@@ -90,6 +90,12 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
         startProgress();
     }
 
+    @Override
+    protected void onDestroy() {
+        timer.cancel();
+        super.onDestroy();
+    }
+
     private void startProgress() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -106,6 +112,9 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                     });
                 } else {
                     progress += randomNum();
+                    if (progress >= 100) {
+                        progress = 100;
+                    }
                     circleProgressView.post(() -> {
                         tvRecheck.setEnabled(false);
                         tvSaleUse.setEnabled(false);
@@ -158,7 +167,7 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
             case R.id.tv_sale_use:
                 if (cb.isChecked()) {
                     if (authStatusBean != null) {
-                        if (authStatusBean.getData().needAuth()) {
+                        if (!authStatusBean.getData().needAuth()) {
                             /**
                              * 需要继续认证
                              */

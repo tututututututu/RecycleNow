@@ -1,5 +1,6 @@
 package com.tt.recyclenow.auth.person;
 
+import com.tt.recyclenow.bean.PersonAuthBean;
 import com.tt.recyclenow.bill.IBillView;
 
 /**
@@ -7,4 +8,7 @@ import com.tt.recyclenow.bill.IBillView;
  */
 
 public interface IPersonInfoAuth extends IBillView {
+    void requestPermision();
+
+    void reFillData(PersonAuthBean rep);
 }

@@ -7,4 +7,7 @@ package com.tt.recyclenow.app;
 public class Constants {
     public static final String SP_TOKENDS = "tokens";
     public static final String SP_USER_NAME = "userName";
+    public static String LAT = "lat";
+    public static String LNG = "lng";
+    public static String ADDR = "addr";
 }

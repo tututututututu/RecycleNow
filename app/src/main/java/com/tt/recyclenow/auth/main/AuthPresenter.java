@@ -8,6 +8,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.bean.AuthStatusBean;
+import com.tt.recyclenow.bean.WebAuthBean;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -29,7 +30,13 @@ public class AuthPresenter extends TBasePresenter<IAuthView> {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        //getView().onLoadError();
+                        WebAuthBean bean = JSON.parseObject(s, WebAuthBean.class);
+                        if (bean.getCode() == 0) {
+                            getView().onGetAuthUrlOk(bean.getData().getUrl());
+                        } else {
+                            getView().onLoadError(bean.getMsg());
+                        }
+
                     }
                 });
     }
@@ -40,8 +47,14 @@ public class AuthPresenter extends TBasePresenter<IAuthView> {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        AuthStatusBean bean = JSON.parseObject(s,AuthStatusBean.class);
-                        getView().onAuthStatusOk(bean);
+                        AuthStatusBean bean = JSON.parseObject(s, AuthStatusBean.class);
+
+                        if (bean.getCode() == 0) {
+                            getView().onAuthStatusOk(bean);
+                        } else {
+                            getView().onLoadError(bean.getMsg());
+                        }
+
                     }
                 });
     }

@@ -173,15 +173,15 @@ public class AuthStatusBean extends BaseRep implements Parcelable {
 
             if ("1".equals(getNameMark()) &&
                     "1".equals(getGrMark()) &&
-                    (("0".equals(getPhonexs()) && "2".equals(getPhoneMark())) ||
-                            "1".equals(getPhonexs())) &&
-                    (("0".equals(getTbxs()) && "2".equals(getTbMark())) ||
-                            "1".equals(getTbxs())) &&
+                    (("1".equals(getPhonexs()) && "2".equals(getPhoneMark())) ||
+                            "0".equals(getPhonexs())) &&
+                    (("1".equals(getTbxs()) && "2".equals(getTbMark())) ||
+                            "0".equals(getTbxs())) &&
                     "1".equals(getTxlMark()) &&
                     "1".equals(getDlwzMark()) &&
                     !TextUtils.isEmpty(bankcard) &&
-                    (("0".equals(getXxxs()) && "2".equals(getXxMark())) ||
-                            "1".equals(getXxxs()))
+                    (("1".equals(getXxxs()) && "2".equals(getXxMark())) ||
+                            "0".equals(getXxxs()))
                     ) {
                 return false;
             }

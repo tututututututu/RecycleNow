@@ -43,7 +43,6 @@
                     android:src="@mipmap/ic_right_arrow" />
 
                 <EditText
-                    android:editable="false"
                     android:id="@+id/et1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -51,7 +50,8 @@
                     android:layout_toLeftOf="@id/iv1"
                     android:layout_toRightOf="@id/tv1"
                     android:background="@null"
-                    android:enabled="false"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请点击选择"
                     android:textSize="14sp" />
 
@@ -92,7 +92,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/tv2"
                     android:background="@null"
-                    android:enabled="false"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请点击选择"
                     android:textSize="14sp" />
 
@@ -134,7 +135,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/tv3"
                     android:background="@null"
-                    android:enabled="false"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请点击选择"
                     android:textSize="14sp" />
 
@@ -205,7 +207,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/tv5"
                     android:background="@null"
-                    android:enabled="false"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请点击选择"
                     android:textSize="14sp" />
 
@@ -249,7 +252,8 @@
                     android:layout_toLeftOf="@id/iv6"
                     android:layout_toRightOf="@id/tv6"
                     android:background="@null"
-                    android:enabled="false"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请点击选择"
                     android:textSize="14sp" />
 
@@ -315,6 +319,7 @@
                     android:layout_toRightOf="@id/tv8"
                     android:background="@null"
                     android:hint="请点击选择"
+                    android:inputType="number"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -357,7 +362,8 @@
                     android:layout_toLeftOf="@id/iv9"
                     android:layout_toRightOf="@id/tv9"
                     android:background="@null"
-                    android:enabled="false"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请点击选择"
                     android:textSize="14sp" />
 
@@ -423,6 +429,72 @@
                     android:layout_toRightOf="@id/tv11"
                     android:background="@null"
                     android:hint="请填写11位手机号码"
+                    android:inputType="number"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tv_qq"
+                    android:layout_width="74dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="QQ号码"
+                    android:textColor="@color/base_font" />
+
+                <EditText
+                    android:id="@+id/et_qq"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/tv_qq"
+                    android:background="@null"
+                    android:hint="请填写QQ号码"
+                    android:inputType="number"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg"></View>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tv_wx"
+                    android:layout_width="74dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="微信号"
+                    android:textColor="@color/base_font" />
+
+                <EditText
+                    android:id="@+id/et_wx"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/tv_wx"
+                    android:background="@null"
+                    android:hint="请填写微信号"
+                    android:inputType="number"
                     android:textSize="14sp" />
 
             </RelativeLayout>

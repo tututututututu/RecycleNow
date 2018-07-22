@@ -11,7 +11,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.hzecool.app.bean.app.ARouterUrl;
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
-import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.auth.idcard.IDCardActivity;
 import com.tt.recyclenow.auth.person.PersonInfoAuthActivity;
 import com.tt.recyclenow.bean.AuthStatusBean;
@@ -25,7 +24,7 @@ import butterknife.OnClick;
  */
 
 public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
-        implements IAuthView{
+        implements IAuthView {
     @BindView(R.id.tv_sm)
     CheckedTextView tvSm;
     @BindView(R.id.rl1)
@@ -65,6 +64,8 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
 
     private AuthStatusBean authStatusBean;
 
+    private String nextTitle;
+
     @Override
     public int getLayoutID() {
         return R.layout.auth_activity_layout;
@@ -87,17 +88,17 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
     }
 
     private void updateView() {
-        if ("0".equals(authStatusBean.getData().getPhonexs())) {
+        if ("1".equals(authStatusBean.getData().getPhonexs())) {
             rl3.setVisibility(View.VISIBLE);
         } else {
             rl3.setVisibility(View.GONE);
         }
-        if ("0".equals(authStatusBean.getData().getTbxs())) {
+        if ("1".equals(authStatusBean.getData().getTbxs())) {
             rl4.setVisibility(View.VISIBLE);
         } else {
             rl4.setVisibility(View.GONE);
         }
-        if ("0".equals(authStatusBean.getData().getXxxs())) {
+        if ("1".equals(authStatusBean.getData().getXxxs())) {
             rl5.setVisibility(View.VISIBLE);
         } else {
             rl5.setVisibility(View.GONE);
@@ -166,7 +167,7 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
 
     @Override
     public void onLoadError(String msg) {
-
+        showAlertDlg("提示", msg);
     }
 
     @Override
@@ -187,22 +188,15 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
                 break;
             case R.id.rl3:
                 mPresenter.getUrl(authStatusBean.getData().getPhoneUrl());
-//                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
-//                        .withString("url", ServerUrls.ROUTER + authStatusBean.getData().getPhoneUrl()+"&tokens="+ SPUtils.getString(Constants.SP_TOKENDS))
-//                        .withString("title", "手机认证")
-//                        .navigation(this);
+                nextTitle = "手机认证";
                 break;
             case R.id.rl4:
-                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
-                        .withString("url", ServerUrls.ROUTER + authStatusBean.getData().getTbUrl())
-                        .withString("title", "淘宝认证")
-                        .navigation(this);
+                mPresenter.getUrl(authStatusBean.getData().getTbUrl());
+                nextTitle = "淘宝认证";
                 break;
             case R.id.rl5:
-                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
-                        .withString("url", ServerUrls.ROUTER + authStatusBean.getData().getXxUrl())
-                        .withString("title", "学信认证")
-                        .navigation(this);
+                mPresenter.getUrl(authStatusBean.getData().getXxUrl());
+                nextTitle = "学信认证";
                 break;
             default:
                 break;
@@ -222,5 +216,13 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
     @Override
     public void onAuthStatusOk(AuthStatusBean bean) {
         this.authStatusBean = bean;
+    }
+
+    @Override
+    public void onGetAuthUrlOk(String url) {
+        ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
+                .withString("url", url)
+                .withString("title", this.nextTitle)
+                .navigation(this);
     }
 }

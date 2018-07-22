@@ -10,4 +10,6 @@ import com.tt.recyclenow.bean.AuthStatusBean;
 
 public interface IAuthView extends TIBaseView{
     void onAuthStatusOk(AuthStatusBean bean);
+
+    void onGetAuthUrlOk(String url);
 }

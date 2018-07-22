@@ -77,7 +77,7 @@ public class LoginActivity extends TBaseActivity<ILoginView, LoginPresenter>
 
     @Override
     public void initTitle(ImageView ivBack, TextView tvBack, View llBack, TextView titleName, TextView tvMenu, View titleRoot) {
-
+        titleName.setText("登录");
     }
 
     @Override
@@ -111,7 +111,9 @@ public class LoginActivity extends TBaseActivity<ILoginView, LoginPresenter>
 
     private boolean checkRight() {
         if (TextUtils.isEmpty(edtLoginName.getText().toString().trim()) ||
-                TextUtils.isEmpty(edtPsw.getText().toString().trim())) {
+                TextUtils.isEmpty(edtPsw.getText().toString().trim()) ||
+                edtPsw.getText().toString().trim().length() < 6
+                ) {
             return false;
         }
 

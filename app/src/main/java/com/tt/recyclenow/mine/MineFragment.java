@@ -15,10 +15,14 @@ import android.widget.Toast;
 import com.hzecool.common.utils.SPUtils;
 import com.hzecool.core.activity.webview.JsBridgeWebViewActivity;
 import com.hzecool.core.base.TBaseFragment;
+import com.qihoo.appstore.common.updatesdk.lib.UpdateHelper;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.login.LoginActivity;
 import com.tt.recyclenow.account.setting.AccountSettingActivity;
 import com.tt.recyclenow.app.Constants;
+import com.tt.recyclenow.auth.bank.BankActivity;
+import com.tt.recyclenow.bean.ContatcUsBean;
+import com.tt.recyclenow.main.TextActivity;
 import com.tt.recyclenow.recycleHistory.HistoryActivity;
 
 import butterknife.BindView;
@@ -53,6 +57,8 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
     @BindView(R.id.tv_name)
     TextView tvName;
 
+    private ContatcUsBean bean;
+
     @Override
     public int getLayoutID() {
         return R.layout.mine_fragment_layout;
@@ -69,7 +75,8 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
 
     @Override
     public void initTitle(ImageView ivBack, TextView tvBack, View llBack, TextView titleName, TextView tvMenu, View titleRoot) {
-
+        titleName.setText("我的");
+        llBack.setVisibility(View.GONE);
     }
 
     @Override
@@ -79,7 +86,7 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
 
     @Override
     public void onLoadData(Object o) {
-
+        bean = (ContatcUsBean) o;
     }
 
     @Override
@@ -97,7 +104,7 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
 
     }
 
-    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl_history})
+    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl_history, R.id.rl_bank})
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
@@ -115,7 +122,11 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
                 /**
                  * 跳转QQ对话
                  */
-                openQQ();
+                //openQQ();
+                intent = new Intent(getActivity(),TextActivity.class);
+                intent.putExtra("text",bean.getData().getLxfknr());
+                startActivity(intent);
+
                 break;
             case R.id.rl3:
                 intent = new Intent(getActivity(), JsBridgeWebViewActivity.class);
@@ -126,6 +137,10 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
                 break;
             case R.id.rl_history:
                 intent = new Intent(getActivity(), HistoryActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_bank:
+                intent = new Intent(getActivity(), BankActivity.class);
                 startActivity(intent);
                 break;
             default:
@@ -145,6 +160,8 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
         /**
          * 版本更新
          */
+        UpdateHelper.getInstance().init(getActivity().getApplicationContext(), getResources().getColor(R.color.main));
+        UpdateHelper.getInstance().manualUpdate("com.tt.recyclenow");
     }
 
     public boolean checkApkExist(Context context, String packageName) {

@@ -7,10 +7,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.hzecool.app.bean.app.ARouterUrl;
 import com.hzecool.common.utils.ToastUtils;
-import com.hzecool.core.activity.webview.JsBridgeWebViewActivity;
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.auth.main.AuthActivity;
 import com.tt.recyclenow.bean.AuthStatusBean;
 import com.tt.recyclenow.recyclerList.RecyclerListActivity;
@@ -124,7 +126,7 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                     });
                 }
             }
-        }, 0, 50);
+        }, 0, 20);
     }
 
     private int randomNum() {
@@ -167,7 +169,7 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
             case R.id.tv_sale_use:
                 if (cb.isChecked()) {
                     if (authStatusBean != null) {
-                        if (!authStatusBean.getData().needAuth()) {
+                        if (authStatusBean.getData().needAuth()) {
                             /**
                              * 需要继续认证
                              */
@@ -189,8 +191,10 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                 }
                 break;
             case R.id.tv_promise:
-                intent = new Intent(this, JsBridgeWebViewActivity.class);
-                startActivity(intent);
+                ARouter.getInstance().build(ARouterUrl.AR_URL_WEB_VIEW)
+                        .withString("url", ServerUrls.ROUTER + "app/chengnuoshu.htm")
+                        .withString("title", "承诺函")
+                        .navigation(this);
                 break;
             default:
                 break;

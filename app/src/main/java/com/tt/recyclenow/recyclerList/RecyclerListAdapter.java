@@ -24,6 +24,7 @@ public class RecyclerListAdapter extends BaseQuickAdapter<RecycleBean.DataBean, 
                 .setText(R.id.tv_price_day, item.getDqzj())
                 .setText(R.id.tv_day, item.getTs())
                 .setText(R.id.tv_price, item.getHsze());
+        helper.addOnClickListener(R.id.tv_recycler);
 
     }
 }

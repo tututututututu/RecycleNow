@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg">
 
     <include
         android:id="@+id/title"
@@ -36,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="天天回收"
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -67,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="天天回收"
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -98,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="天天回收"
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -129,7 +127,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="天天回收"
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -160,7 +157,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="天天回收"
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -191,7 +187,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="天天回收"
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -222,7 +217,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="天天回收"
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -252,6 +246,7 @@
             android:textSize="10sp" />
 
         <TextView
+            android:id="@+id/tv_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="14天"
@@ -261,11 +256,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="内,已"
+            android:text="内,以"
             android:textColor="@color/grey"
             android:textSize="10sp" />
 
         <TextView
+            android:id="@+id/tv_huigou_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000元"
@@ -305,7 +301,7 @@
             android:id="@+id/tv_promise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/promise"
+            android:text="回购协议"
             android:textColor="@color/base_font_click" />
     </LinearLayout>
 

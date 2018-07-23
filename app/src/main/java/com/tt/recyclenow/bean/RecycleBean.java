@@ -1,12 +1,15 @@
 package com.tt.recyclenow.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by tu on 2018/7/22.
  */
 
-public class RecycleBean extends BaseRep{
+public class RecycleBean extends BaseRep {
 
     private List<DataBean> data;
 
@@ -18,7 +21,7 @@ public class RecycleBean extends BaseRep{
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Parcelable {
         /**
          * dqzj : 115
          * dzje : 685
@@ -193,7 +196,7 @@ public class RecycleBean extends BaseRep{
             this.xsf = xsf;
         }
 
-        public static class TimeBean {
+        public static class TimeBean implements Parcelable {
             /**
              * date : 18
              * day : 3
@@ -297,6 +300,114 @@ public class RecycleBean extends BaseRep{
             public void setYear(int year) {
                 this.year = year;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeInt(this.date);
+                dest.writeInt(this.day);
+                dest.writeInt(this.hours);
+                dest.writeInt(this.minutes);
+                dest.writeInt(this.month);
+                dest.writeInt(this.nanos);
+                dest.writeInt(this.seconds);
+                dest.writeLong(this.time);
+                dest.writeInt(this.timezoneOffset);
+                dest.writeInt(this.year);
+            }
+
+            public TimeBean() {
+            }
+
+            protected TimeBean(Parcel in) {
+                this.date = in.readInt();
+                this.day = in.readInt();
+                this.hours = in.readInt();
+                this.minutes = in.readInt();
+                this.month = in.readInt();
+                this.nanos = in.readInt();
+                this.seconds = in.readInt();
+                this.time = in.readLong();
+                this.timezoneOffset = in.readInt();
+                this.year = in.readInt();
+            }
+
+            public static final Creator<TimeBean> CREATOR = new Creator<TimeBean>() {
+                @Override
+                public TimeBean createFromParcel(Parcel source) {
+                    return new TimeBean(source);
+                }
+
+                @Override
+                public TimeBean[] newArray(int size) {
+                    return new TimeBean[size];
+                }
+            };
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.dqzj);
+            dest.writeString(this.dzje);
+            dest.writeString(this.glf);
+            dest.writeString(this.hgze);
+            dest.writeString(this.hsze);
+            dest.writeInt(this.id);
+            dest.writeInt(this.mark);
+            dest.writeParcelable(this.time, flags);
+            dest.writeString(this.title);
+            dest.writeInt(this.tj);
+            dest.writeString(this.tjrjl);
+            dest.writeInt(this.ts);
+            dest.writeString(this.wyj);
+            dest.writeString(this.xq1);
+            dest.writeString(this.xq2);
+            dest.writeString(this.xq3);
+            dest.writeString(this.xsf);
+        }
+
+        public DataBean() {
+        }
+
+        protected DataBean(Parcel in) {
+            this.dqzj = in.readString();
+            this.dzje = in.readString();
+            this.glf = in.readString();
+            this.hgze = in.readString();
+            this.hsze = in.readString();
+            this.id = in.readInt();
+            this.mark = in.readInt();
+            this.time = in.readParcelable(TimeBean.class.getClassLoader());
+            this.title = in.readString();
+            this.tj = in.readInt();
+            this.tjrjl = in.readString();
+            this.ts = in.readInt();
+            this.wyj = in.readString();
+            this.xq1 = in.readString();
+            this.xq2 = in.readString();
+            this.xq3 = in.readString();
+            this.xsf = in.readString();
+        }
+
+        public static final Parcelable.Creator<DataBean> CREATOR = new Parcelable.Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel source) {
+                return new DataBean(source);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
     }
 }

@@ -138,14 +138,16 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     public void BannerOk(IndexBanner indexBanner) {
 
         List<String> imageArray = new ArrayList<>();
+        List<String> tt = new ArrayList<>();
 
         for (IndexBanner.DataBean dataBean : indexBanner.getData()) {
             imageArray.add(dataBean.getImg());
+            tt.add("");
         }
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         banner.setImageLoader(new GlideImageLoader());
         banner.setImages(imageArray);
-        banner.setBannerTitles(imageArray);
+        banner.setBannerTitles(tt);
         banner.setOnBannerListener(position -> {
 
         });

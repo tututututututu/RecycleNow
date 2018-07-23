@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg"
     android:gravity="center_horizontal"
     android:layout_height="match_parent"
@@ -15,7 +16,120 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/base_white"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/app_user" />
+
+        <com.hzecool.widget.ClearableEditText
+            android:id="@+id/edt_loginName"
+            style="@style/et_style"
+            android:inputType="textPassword"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:hint="请输入新密码" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/base_white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/app_sms_code" />
+
+        <com.hzecool.widget.ClearableEditText
+            android:id="@+id/edt_code"
+            style="@style/et_style"
+            android:editable="false"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:inputType="number"
+            android:maxLength="11" />
+
+        <View
+            android:layout_width="@dimen/dp_05"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/base_slh_divider"></View>
+
+        <com.hzecool.widget.CountDownButton.CountDownButton
+            android:id="@+id/btn_getcode"
+            android:layout_width="86dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:background="@color/base_transparent"
+            android:gravity="center"
+            android:text="获取验证码"
+            android:textColor="@color/base_slh_text_orange"
+            android:textSize="11sp"
+            app:countDown="60000"
+            app:countDownFormat="重新获取"
+            app:countDownInterval="1000"
+            app:enableCountDown="true"
+            app:enableFalseTextColor="@color/base_slh_text_gray"
+            app:enableTextColor="@color/base_slh_text_orange" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/base_white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/app_sms_code" />
+
+        <com.hzecool.widget.ClearableEditText
+            android:id="@+id/edt_psw"
+            style="@style/et_style"
+            android:inputType="textPassword"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:hint="请输入验证码" />
+
+    </LinearLayout>
+
+    <CheckedTextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/btn_rectangle_selector"
+        android:checked="false"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="完成"
+        android:textAlignment="center"
+        android:textColor="@color/base_white"
+        android:textStyle="bold" />
 
 
 

@@ -8,4 +8,5 @@ import com.hzecool.core.base.TIBaseView;
  */
 
 public interface IBillView extends TIBaseView{
+    void orderOk(String msg);
 }

@@ -29,7 +29,7 @@ public class CheckingResultPresenter extends TBasePresenter<ICheckingResultView>
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        AuthStatusBean bean = JSON.parseObject(s,AuthStatusBean.class);
+                        AuthStatusBean bean = JSON.parseObject(s, AuthStatusBean.class);
                         getView().onAuthStatusOk(bean);
                     }
                 });

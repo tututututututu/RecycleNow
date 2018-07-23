@@ -68,6 +68,6 @@ dependencies {
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.alibaba:fastjson:1.2.47'
     compile(name: 'zzplatform_sdk', ext: 'aar')
-    compile(name: 'idcard_ocr', ext:'aar')
+    compile(name: 'idcard_ocr', ext: 'aar')
     compile 'liji.library.dev:citypickerview:3.1.8'
 }

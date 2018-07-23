@@ -1,5 +1,6 @@
 package com.tt.recyclenow.recyclerList;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.bean.RecycleBean;
+import com.tt.recyclenow.bill.BillActivity;
 
 import java.util.List;
 
@@ -30,6 +32,12 @@ public class RecyclerListActivity extends TBaseActivity<IRecyclerListView, Recyc
     @Override
     public void onLoadData(Object o) {
         adapter.setNewData((List<RecycleBean.DataBean>) o);
+
+        adapter.setOnItemChildClickListener((adapter, view, position) -> {
+            Intent intent = new Intent(RecyclerListActivity.this,BillActivity.class);
+            intent.putExtra("item",this.adapter.getData().get(position));
+            startActivity(intent);
+        });
     }
 
     @Override

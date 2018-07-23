@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hzecool.core.base.TBaseActivity;
+import com.qihoo.appstore.common.updatesdk.lib.UpdateHelper;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.index.IndexFragment;
 import com.tt.recyclenow.mine.MineFragment;
@@ -42,6 +43,9 @@ public class MainActivity extends TBaseActivity<IMainView, MainPresenter>
                 .initialise();
 
         changeFragment(0);
+
+        UpdateHelper.getInstance().init(getApplicationContext(),getResources().getColor(R.color.main));
+        UpdateHelper.getInstance().autoUpdate("com.tt.recyclenow", true, 1000 * 60 * 60);
     }
 
     @Override

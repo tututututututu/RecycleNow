@@ -119,7 +119,10 @@ public class JsBridgeWebViewActivity extends TBaseActivity<IJsBridgeWebViewView,
         });
 
         webview.setWebViewClient(new TWebViewClient(webview));
+        webview.getSettings().setAppCacheEnabled(true);//是否使用缓存
+        webview.getSettings().setDomStorageEnabled(true);//DOM Storage
 
+        webview.getSettings().setJavaScriptEnabled(true);
         registJsCallJavaMethod();
     }
 

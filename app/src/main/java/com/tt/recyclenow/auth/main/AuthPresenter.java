@@ -8,6 +8,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.bean.AuthStatusBean;
+import com.tt.recyclenow.bean.BaseRep;
 import com.tt.recyclenow.bean.WebAuthBean;
 
 import okhttp3.Call;
@@ -65,7 +66,12 @@ public class AuthPresenter extends TBasePresenter<IAuthView> {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-
+                        BaseRep rep = JSON.parseObject(s,BaseRep.class);
+                        if (rep.getCode()==0){
+                            getView().canNext();
+                        }else {
+                            getView().onLoadError(rep.getMsg());
+                        }
                     }
                 });
     }

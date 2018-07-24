@@ -28,7 +28,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="24dp"
-            android:src="@mipmap/app_user" />
+            android:src="@mipmap/mima" />
 
         <com.hzecool.widget.ClearableEditText
             android:id="@+id/edt_loginName"
@@ -53,7 +53,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="24dp"
-            android:src="@mipmap/app_sms_code" />
+            android:src="@mipmap/app_user" />
 
         <com.hzecool.widget.ClearableEditText
             android:id="@+id/edt_code"
@@ -61,7 +61,7 @@
             android:editable="false"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:enabled="false"
+            android:hint="请输入手机号"
             android:inputType="number"
             android:maxLength="11" />
 
@@ -83,7 +83,7 @@
             android:textColor="@color/base_slh_text_orange"
             android:textSize="11sp"
             app:countDown="60000"
-            app:countDownFormat="重新获取"
+            app:countDownFormat="(%ds)重新获取"
             app:countDownInterval="1000"
             app:enableCountDown="true"
             app:enableFalseTextColor="@color/base_slh_text_gray"

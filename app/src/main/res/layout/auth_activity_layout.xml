@@ -193,6 +193,7 @@
 
 
     <CheckedTextView
+        android:checked="true"
         android:id="@+id/ctv_next"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -201,5 +202,5 @@
         android:gravity="center"
         android:text="下一步"
         android:textAlignment="center"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 </RelativeLayout>

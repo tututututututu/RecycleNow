@@ -110,7 +110,7 @@ public class ChangePswActivity extends TBaseActivity<IChangePswView, ChangePswPr
 
     @Override
     public void initTitle(ImageView ivBack, TextView tvBack, View llBack, TextView titleName, TextView tvMenu, View titleRoot) {
-
+        titleName.setText("修改密码");
     }
 
     @Override

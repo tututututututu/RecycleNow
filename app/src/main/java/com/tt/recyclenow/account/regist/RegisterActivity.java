@@ -34,6 +34,8 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
     CountDownButton btnGetcode;
     @BindView(R.id.edt_psw)
     ClearableEditText edtPsw;
+    @BindView(R.id.edt_tjm)
+    ClearableEditText edtTjm;
     @BindView(R.id.tv_login)
     CheckedTextView tvLogin;
 
@@ -168,5 +170,10 @@ public class RegisterActivity extends TBaseActivity<IRegisterView, RegisterPrese
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public String getTuiJM() {
+        return edtTjm.getText().toString().trim();
     }
 }

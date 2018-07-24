@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hzecool.common.utils.SPUtils;
-import com.hzecool.core.activity.webview.JsBridgeWebViewActivity;
 import com.hzecool.core.base.TBaseFragment;
 import com.qihoo.appstore.common.updatesdk.lib.UpdateHelper;
 import com.tt.recyclenow.R;
@@ -23,6 +22,7 @@ import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.auth.bank.BankActivity;
 import com.tt.recyclenow.bean.ContatcUsBean;
 import com.tt.recyclenow.main.TextActivity;
+import com.tt.recyclenow.mine.guide.HelpActivity;
 import com.tt.recyclenow.recycleHistory.HistoryActivity;
 
 import butterknife.BindView;
@@ -104,7 +104,17 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
 
     }
 
-    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl_history, R.id.rl_bank})
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!TextUtils.isEmpty(SPUtils.getString(Constants.SP_USER_NAME))) {
+            tvName.setText(SPUtils.getString(Constants.SP_USER_NAME));
+        } else {
+            tvName.setText("请登录");
+        }
+    }
+
+    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl_history, R.id.rl_bank, R.id.ll_info})
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
@@ -119,17 +129,13 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
                 }
                 break;
             case R.id.rl2:
-                /**
-                 * 跳转QQ对话
-                 */
-                //openQQ();
-                intent = new Intent(getActivity(),TextActivity.class);
-                intent.putExtra("text",bean.getData().getLxfknr());
+                intent = new Intent(getActivity(), TextActivity.class);
+                intent.putExtra("text", bean.getData().getLxfknr());
                 startActivity(intent);
 
                 break;
             case R.id.rl3:
-                intent = new Intent(getActivity(), JsBridgeWebViewActivity.class);
+                intent = new Intent(getActivity(), HelpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl4:
@@ -142,6 +148,12 @@ public class MineFragment extends TBaseFragment<IMineView, MinePresenter>
             case R.id.rl_bank:
                 intent = new Intent(getActivity(), BankActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.ll_info:
+                if (TextUtils.isEmpty(SPUtils.getString(Constants.SP_TOKENDS))) {
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
             default:
                 break;

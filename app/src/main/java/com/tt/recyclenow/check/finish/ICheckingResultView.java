@@ -2,6 +2,7 @@ package com.tt.recyclenow.check.finish;
 
 import com.hzecool.core.base.TIBaseView;
 import com.tt.recyclenow.bean.AuthStatusBean;
+import com.tt.recyclenow.bean.ZigeBean;
 
 /**
  * @author tutu
@@ -10,4 +11,6 @@ import com.tt.recyclenow.bean.AuthStatusBean;
 
 public interface ICheckingResultView extends TIBaseView {
     void onAuthStatusOk(AuthStatusBean bean);
+
+    void onZige(ZigeBean zigeBean);
 }

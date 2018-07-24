@@ -16,4 +16,6 @@ public interface IRegisterView extends TIBaseView {
     void getCodeOk();
 
     void loginOk(LoginBean rep);
+
+    String getTuiJM();
 }

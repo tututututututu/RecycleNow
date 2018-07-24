@@ -14,6 +14,7 @@ import com.tt.recyclenow.R;
 import com.tt.recyclenow.auth.idcard.IDCardActivity;
 import com.tt.recyclenow.auth.person.PersonInfoAuthActivity;
 import com.tt.recyclenow.bean.AuthStatusBean;
+import com.tt.recyclenow.recyclerList.RecyclerListActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -120,25 +121,34 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
             tvGr.setText("未认证");
         }
 
-        if ("1".equals(authStatusBean.getData().getPhoneMark())) {
+        if ("2".equals(authStatusBean.getData().getPhoneMark())) {
             tvSj.setChecked(true);
             tvSj.setText("已认证");
+        } else if ("1".equals(authStatusBean.getData().getPhoneMark())) {
+            tvSj.setChecked(false);
+            tvSj.setText("认证中");
         } else {
             tvSj.setChecked(false);
             tvSj.setText("未认证");
         }
 
-        if ("1".equals(authStatusBean.getData().getTbMark())) {
+        if ("2".equals(authStatusBean.getData().getTbMark())) {
             tvTb.setChecked(true);
             tvTb.setText("已认证");
+        } else if ("1".equals(authStatusBean.getData().getTbMark())) {
+            tvTb.setChecked(false);
+            tvTb.setText("认证中");
         } else {
             tvTb.setChecked(false);
             tvTb.setText("未认证");
         }
 
-        if ("1".equals(authStatusBean.getData().getXxMark())) {
+        if ("2".equals(authStatusBean.getData().getXxMark())) {
             tvXx.setChecked(true);
             tvXx.setText("已认证");
+        } else if ("1".equals(authStatusBean.getData().getXxMark())) {
+            tvXx.setChecked(true);
+            tvXx.setText("认证中");
         } else {
             tvXx.setChecked(false);
             tvXx.setText("未认证");
@@ -198,6 +208,9 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
                 mPresenter.getUrl(authStatusBean.getData().getXxUrl());
                 nextTitle = "学信认证";
                 break;
+            case R.id.ctv_next:
+                mPresenter.finishAuthStatus();
+                break;
             default:
                 break;
         }
@@ -224,5 +237,11 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
                 .withString("url", url)
                 .withString("title", this.nextTitle)
                 .navigation(this);
+    }
+
+    @Override
+    public void canNext() {
+        Intent intent1 = new Intent(this, RecyclerListActivity.class);
+        startActivity(intent1);
     }
 }

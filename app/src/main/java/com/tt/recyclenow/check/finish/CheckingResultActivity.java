@@ -15,6 +15,7 @@ import com.tt.recyclenow.R;
 import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.auth.main.AuthActivity;
 import com.tt.recyclenow.bean.AuthStatusBean;
+import com.tt.recyclenow.bean.ZigeBean;
 import com.tt.recyclenow.recyclerList.RecyclerListActivity;
 
 import java.util.Random;
@@ -168,6 +169,13 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                 break;
             case R.id.tv_sale_use:
                 if (cb.isChecked()) {
+
+                    if ("1".equals(this.zigeBean.getData().getCloseMark())){
+                        showAlertDlg("提示","您暂时无法下单");
+                        return;
+                    }
+
+
                     if (authStatusBean != null) {
                         if (authStatusBean.getData().needAuth()) {
                             /**
@@ -205,5 +213,11 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
     @Override
     public void onAuthStatusOk(AuthStatusBean bean) {
         this.authStatusBean = bean;
+    }
+
+    private ZigeBean zigeBean;
+    @Override
+    public void onZige(ZigeBean zigeBean) {
+        this.zigeBean = zigeBean;
     }
 }

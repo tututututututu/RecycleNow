@@ -2,6 +2,7 @@ package com.tt.recyclenow.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,6 @@ public class TextActivity extends AppCompatActivity {
 
         String string = getIntent().getStringExtra("text");
 
-        tv.setText(string);
+        tv.setText(Html.fromHtml(string));
     }
 }

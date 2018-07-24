@@ -8,6 +8,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.bean.AuthStatusBean;
+import com.tt.recyclenow.bean.ZigeBean;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -21,6 +22,7 @@ public class CheckingResultPresenter extends TBasePresenter<ICheckingResultView>
     @Override
     protected void start() {
         authStatus();
+        zige();
     }
 
     public void authStatus() {
@@ -31,6 +33,19 @@ public class CheckingResultPresenter extends TBasePresenter<ICheckingResultView>
                     public void onSuccess(String s, Call call, Response response) {
                         AuthStatusBean bean = JSON.parseObject(s, AuthStatusBean.class);
                         getView().onAuthStatusOk(bean);
+                    }
+                });
+    }
+
+    public void zige() {
+        OkGo.post(ServerUrls.ROUTER + "app/getCloseMark.htm")
+                .params("tokens", SPUtils.getString(Constants.SP_TOKENDS))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        ZigeBean zigeBean = JSON.parseObject(s,ZigeBean.class);
+
+                        getView().onZige(zigeBean);
                     }
                 });
     }

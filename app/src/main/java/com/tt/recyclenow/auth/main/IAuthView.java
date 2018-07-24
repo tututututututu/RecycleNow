@@ -12,4 +12,6 @@ public interface IAuthView extends TIBaseView{
     void onAuthStatusOk(AuthStatusBean bean);
 
     void onGetAuthUrlOk(String url);
+
+    void canNext();
 }

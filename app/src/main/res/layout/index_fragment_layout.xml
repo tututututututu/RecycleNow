@@ -237,7 +237,7 @@
             android:background="@drawable/btn_rectangle_main_soild"
             android:gravity="center"
             android:text="我要卖手机"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

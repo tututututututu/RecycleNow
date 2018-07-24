@@ -11,7 +11,7 @@ public class AppData {
     /**
      * 是否debug状态
      */
-    public static final boolean LOG_DEBUG = true;
+    public static final boolean LOG_DEBUG = false;
 
     /**
      * 是否展示奔溃界面

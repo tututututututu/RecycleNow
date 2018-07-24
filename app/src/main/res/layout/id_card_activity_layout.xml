@@ -111,6 +111,7 @@
             </RelativeLayout>
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/et_id"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
@@ -125,6 +126,7 @@
                 android:paddingLeft="10dp" />
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"

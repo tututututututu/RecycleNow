@@ -6,11 +6,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hzecool.common.utils.AppUtils;
 import com.hzecool.common.utils.DeviceUtils;
+import com.hzecool.common.utils.ResourceUtils;
 import com.hzecool.common.utils.SPUtils;
 import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBaseActivity;
 import com.hzecool.core.base.TBaseFragment;
+import com.hzecool.widget.materialdialog.MaterialDialog;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.account.login.LoginActivity;
 import com.tt.recyclenow.app.Constants;
@@ -86,16 +89,15 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
         if (TextUtils.isEmpty(module) || TextUtils.isEmpty(memory)) {
             tvPrice.setText("不支持回收");
         } else {
-            mPresenter.getPhonePrice("iphone 6", "16");
-            //mPresenter.getPhonePrice(DeviceUtils.getModel(), DeviceUtils.getTotalInternalMemorySize());
+            //mPresenter.getPhonePrice("iphone 6", "16");
+            mPresenter.getPhonePrice(DeviceUtils.getModel(), DeviceUtils.getTotalInternalMemorySize());
         }
-
     }
 
     @Override
     public void initTitle(ImageView ivBack, TextView tvBack, View llBack, TextView titleName, TextView tvMenu, View titleRoot) {
         llBack.setVisibility(View.GONE);
-        titleName.setText("即刻回收");
+        titleName.setText(AppUtils.getAppName(getActivity().getApplicationContext()));
     }
 
     @Override
@@ -127,7 +129,16 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
         switch (view.getId()) {
             case R.id.tv_sale:
             case R.id.tv_sale1:
-                startActivity(intent);
+                if ("1".equals(this.phonePriceBean.getData().getMark())) {
+                    new MaterialDialog.Builder(getActivity())
+                            .title("提示")
+                            .content("系统正在升级维护")
+                            .positiveText(ResourceUtils.getString(R.string.confirm))
+                            .show();
+                    return;
+                } else {
+                    startActivity(intent);
+                }
                 break;
             default:
                 break;
@@ -169,6 +180,7 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
         tvPrice.setText("不支持回收");
         tvSale.setEnabled(false);
         tvSale1.setEnabled(false);
+        tvSale.setText("不支持回收");
     }
 
 

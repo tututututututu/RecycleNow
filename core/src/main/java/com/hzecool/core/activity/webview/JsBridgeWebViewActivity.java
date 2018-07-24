@@ -96,8 +96,6 @@ public class JsBridgeWebViewActivity extends TBaseActivity<IJsBridgeWebViewView,
         }
     }
 
-
-
     private void initWebView() {
         webview.setDefaultHandler(new DefaultHandler());
 
@@ -162,7 +160,7 @@ public class JsBridgeWebViewActivity extends TBaseActivity<IJsBridgeWebViewView,
      * 注册方法提供给JS调用  demo
      */
     public void registJsCallJavaMethod() {
-        webview.registerHandler("nativeFunc", new BridgeHandler() {
+        webview.registerHandler("onBack", new BridgeHandler() {
 
             /**
              * Js调用submitFromWeb这个方法后 在handler中处理逻辑
@@ -171,12 +169,7 @@ public class JsBridgeWebViewActivity extends TBaseActivity<IJsBridgeWebViewView,
              */
             @Override
             public void handler(String data, CallBackFunction function) {
-
-                String str = "这是html带入给java的数据:" + data;
-
-                ToastUtils.showShortToast(str);
-
-                function.onCallBack("Java返回给js传递过来的数据=" + data);
+                finish();
             }
 
         });

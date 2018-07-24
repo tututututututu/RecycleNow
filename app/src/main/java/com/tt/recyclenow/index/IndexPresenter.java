@@ -1,10 +1,12 @@
 package com.tt.recyclenow.index;
 
 import com.alibaba.fastjson.JSON;
+import com.hzecool.common.utils.SPUtils;
 import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBasePresenter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.tt.recyclenow.app.Constants;
 import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.bean.IndexBanner;
 import com.tt.recyclenow.bean.PhonePriceBean;
@@ -45,6 +47,7 @@ public class IndexPresenter extends TBasePresenter<IIndexView> {
 
     public void getPhonePrice(String module, String memory) {
         OkGo.post(ServerUrls.ROUTER + "app/getPhonePrice.htm")
+                .params("tokens", SPUtils.getString(Constants.SP_TOKENDS))
                 .params("xh", module)
                 .params("nc", memory)
                 .execute(new StringCallback() {

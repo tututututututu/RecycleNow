@@ -46,6 +46,7 @@ public class RegisterPresenter extends TBasePresenter<IRegisterView> {
         OkGo.post(ServerUrls.ROUTER + "app/registeredUser.htm")
                 .params("userPho", getView().getPhone())
                 .params("pwd", getView().getPsw())
+                .params("tjr", getView().getTuiJM())
                 .params("verificationCode", getView().getCode())
                 .execute(new StringCallback() {
                     @Override

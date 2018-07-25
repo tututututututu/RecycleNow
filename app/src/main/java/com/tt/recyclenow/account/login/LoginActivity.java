@@ -78,6 +78,7 @@ public class LoginActivity extends TBaseActivity<ILoginView, LoginPresenter>
     @Override
     public void initTitle(ImageView ivBack, TextView tvBack, View llBack, TextView titleName, TextView tvMenu, View titleRoot) {
         titleName.setText("登录");
+        llBack.setVisibility(View.GONE);
     }
 
     @Override

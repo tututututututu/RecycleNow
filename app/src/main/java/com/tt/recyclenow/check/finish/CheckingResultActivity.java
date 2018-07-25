@@ -168,34 +168,37 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
                 ToastUtils.showShortToast("功能即将开放");
                 break;
             case R.id.tv_sale_use:
-                if (cb.isChecked()) {
+                try {
+                    if (cb.isChecked()) {
 
-                    if ("1".equals(this.zigeBean.getData().getCloseMark())){
-                        showAlertDlg("提示","您暂时无法下单");
-                        return;
-                    }
+                        if ("1".equals(this.zigeBean.getData().getCloseMark())) {
+                            showAlertDlg("提示", "您暂时无法下单");
+                            return;
+                        }
 
 
-                    if (authStatusBean != null) {
-                        if (authStatusBean.getData().needAuth()) {
-                            /**
-                             * 需要继续认证
-                             */
-                            Intent intent1 = new Intent(this, AuthActivity.class);
-                            intent1.putExtra("auth", this.authStatusBean);
-                            startActivity(intent1);
+                        if (authStatusBean != null) {
+                            if (authStatusBean.getData().needAuth()) {
+                                /**
+                                 * 需要继续认证
+                                 */
+                                Intent intent1 = new Intent(this, AuthActivity.class);
+                                intent1.putExtra("auth", this.authStatusBean);
+                                startActivity(intent1);
+                            } else {
+                                /**
+                                 * 已经认证过了
+                                 */
+                                Intent intent1 = new Intent(this, RecyclerListActivity.class);
+                                startActivity(intent1);
+                            }
                         } else {
-                            /**
-                             * 已经认证过了
-                             */
-                            Intent intent1 = new Intent(this, RecyclerListActivity.class);
-                            startActivity(intent1);
+                            ToastUtils.showShortToast("请求失败");
                         }
                     } else {
-                        ToastUtils.showShortToast("请求失败");
+                        ToastUtils.showShortToast("请勾选承诺函");
                     }
-                } else {
-                    ToastUtils.showShortToast("请勾选承诺函");
+                } catch (Exception e) {
                 }
                 break;
             case R.id.tv_promise:
@@ -216,6 +219,7 @@ public class CheckingResultActivity extends TBaseActivity<ICheckingResultView, C
     }
 
     private ZigeBean zigeBean;
+
     @Override
     public void onZige(ZigeBean zigeBean) {
         this.zigeBean = zigeBean;

@@ -9,10 +9,10 @@
         layout="@layout/toolbar_layout"></include>
 
     <ScrollView
-        android:layout_marginBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title">
+        android:layout_below="@id/title"
+        android:layout_marginBottom="60dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -298,6 +298,7 @@
                 android:background="@color/bg"></View>
 
             <RelativeLayout
+                android:id="@+id/rl8"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:background="@color/white">
@@ -319,6 +320,8 @@
                     android:layout_marginRight="16dp"
                     android:layout_toRightOf="@id/tv8"
                     android:background="@null"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请点击选择"
                     android:inputType="number"
                     android:textSize="14sp" />
@@ -408,6 +411,7 @@
                 android:background="@color/bg"></View>
 
             <RelativeLayout
+                android:id="@+id/rl11"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:background="@color/white">
@@ -429,6 +433,8 @@
                     android:layout_marginRight="16dp"
                     android:layout_toRightOf="@id/tv11"
                     android:background="@null"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="请填写11位手机号码"
                     android:inputType="number"
                     android:textSize="14sp" />
@@ -472,6 +478,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/bg"></View>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="46dp"

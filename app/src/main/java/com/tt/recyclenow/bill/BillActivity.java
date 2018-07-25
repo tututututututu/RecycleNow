@@ -1,5 +1,6 @@
 package com.tt.recyclenow.bill;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
@@ -10,12 +11,14 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.hzecool.app.bean.app.ARouterUrl;
 import com.hzecool.common.utils.DeviceUtils;
+import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBaseActivity;
 import com.hzecool.widget.materialdialog.MaterialDialog;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.app.ServerUrls;
 import com.tt.recyclenow.bean.BankBean;
 import com.tt.recyclenow.bean.RecycleBean;
+import com.tt.recyclenow.recycleHistory.HistoryActivity;
 
 import butterknife.BindView;
 
@@ -141,6 +144,9 @@ public class BillActivity extends TBaseActivity<IBillView, BillPresenter>
 
     @Override
     public void orderOk(String msg) {
-        showAlertDlg("提示", msg);
+        ToastUtils.showShortToast(msg);
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

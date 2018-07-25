@@ -2,7 +2,6 @@ package com.tt.recyclenow.index;
 
 import com.alibaba.fastjson.JSON;
 import com.hzecool.common.utils.SPUtils;
-import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBasePresenter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -36,9 +35,10 @@ public class IndexPresenter extends TBasePresenter<IIndexView> {
                             if (indexBanner.getCode() == 0) {
                                 getView().BannerOk(indexBanner);
                             } else {
-                                ToastUtils.showShortToast(indexBanner.getMsg());
+                                getView().onLoadError(indexBanner.getMsg());
                             }
                         } catch (Exception e) {
+
                         }
 
                     }

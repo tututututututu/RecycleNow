@@ -1,6 +1,7 @@
 package com.tt.recyclenow.index;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.hzecool.common.utils.AppUtils;
 import com.hzecool.common.utils.DeviceUtils;
+import com.hzecool.common.utils.HandlerUtil;
 import com.hzecool.common.utils.ResourceUtils;
 import com.hzecool.common.utils.SPUtils;
 import com.hzecool.common.utils.ToastUtils;
@@ -49,6 +51,8 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
     TextView tvSale;
     @BindView(R.id.banner)
     Banner banner;
+    @BindView(R.id.srf)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private PhonePriceBean phonePriceBean;
 
@@ -64,7 +68,8 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
 
     @Override
     public void onLoadError(String msg) {
-
+        ToastUtils.showShortToast(msg);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -92,6 +97,21 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
             //mPresenter.getPhonePrice("iphone 6", "16");
             mPresenter.getPhonePrice(DeviceUtils.getModel(), DeviceUtils.getTotalInternalMemorySize());
         }
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getBanner();
+                mPresenter.getPhonePrice(DeviceUtils.getModel(), DeviceUtils.getTotalInternalMemorySize());
+
+                HandlerUtil.postDelay(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                },3000);
+            }
+        });
     }
 
     @Override
@@ -167,12 +187,14 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
         banner.setIndicatorGravity(BannerConfig.CENTER);
         banner.setDelayTime(3000);
         banner.start();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void PhonePriceOk(PhonePriceBean rep) {
         this.phonePriceBean = rep;
         tvPrice.setText(" ¥" + rep.getData().getPrice());
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -181,6 +203,7 @@ public class IndexFragment extends TBaseFragment<IIndexView, IndexPresenter>
         tvSale.setEnabled(false);
         tvSale1.setEnabled(false);
         tvSale.setText("不支持回收");
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 

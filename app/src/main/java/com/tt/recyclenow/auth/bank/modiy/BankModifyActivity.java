@@ -1,5 +1,6 @@
 package com.tt.recyclenow.auth.bank.modiy;
 
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -9,9 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hzecool.common.utils.ResourceUtils;
 import com.hzecool.common.utils.ToastUtils;
 import com.hzecool.core.base.TBaseActivity;
+import com.hzecool.widget.materialdialog.MaterialDialog;
 import com.tt.recyclenow.R;
+import com.tt.recyclenow.auth.main.AuthActivity;
 import com.tt.recyclenow.bean.BankBean;
 
 import butterknife.BindView;
@@ -35,7 +39,7 @@ public class BankModifyActivity extends TBaseActivity<IBankModifyView, BankModif
 
         try {
             etCard.setText(bankBean.getBankcard());
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -109,5 +113,19 @@ public class BankModifyActivity extends TBaseActivity<IBankModifyView, BankModif
     public void addOk(String msg) {
         ToastUtils.showShortToast(msg);
         finish();
+    }
+
+    @Override
+    public void noBank(String msg) {
+        new MaterialDialog.Builder(this)
+                .title("提示")
+                .content("请先完成实名认证")
+                .positiveText(ResourceUtils.getString(R.string.confirm))
+                .onPositive((dialog, which) -> {
+                    Intent intent = new Intent(BankModifyActivity.this, AuthActivity.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .show();
     }
 }

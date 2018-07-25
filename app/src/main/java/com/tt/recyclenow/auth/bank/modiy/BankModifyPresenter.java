@@ -20,12 +20,13 @@ import okhttp3.Response;
 public class BankModifyPresenter extends TBasePresenter<IBankModifyView> {
     @Override
     protected void start() {
+        getBank();
     }
 
-    public void onSave(String bankcard){
+    public void onSave(String bankcard) {
         OkGo.post(ServerUrls.ROUTER + "app/addBankCard.htm")
                 .params("tokens", SPUtils.getString(Constants.SP_TOKENDS))
-                .params("bankcard",bankcard)
+                .params("bankcard", bankcard)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -36,6 +37,24 @@ public class BankModifyPresenter extends TBasePresenter<IBankModifyView> {
                             getView().onLoadError(bean.getMsg());
                         }
 
+                    }
+                });
+    }
+
+    public void getBank() {
+        OkGo.post(ServerUrls.ROUTER + "app/getUserBank.htm")
+                .params("tokens", SPUtils.getString(Constants.SP_TOKENDS))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+
+                        BankBean bean = JSON.parseObject(s, BankBean.class);
+                        if (bean.getCode() == 0) {
+                            //getView().noBank(bean.getMsg());
+                            getView().onLoadData(bean.getData());
+                        } else {
+                            getView().noBank(bean.getMsg());
+                        }
                     }
                 });
     }

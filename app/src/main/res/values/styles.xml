@@ -14,6 +14,13 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="sj_theme" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="android:background">@drawable/bg_welcome</item>
+        <item name="android:windowAnimationStyle">@style/core_AppAnimalStyle</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
 
     <style name="et_style">
         <item name="android:layout_width">0dp</item>

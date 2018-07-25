@@ -55,10 +55,10 @@
             android:layout_marginLeft="24dp"
             android:src="@mipmap/app_user" />
 
-        <com.hzecool.widget.ClearableEditText
+        <EditText
             android:id="@+id/edt_code"
             style="@style/et_style"
-            android:editable="false"
+            android:enabled="false"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:hint="请输入手机号"

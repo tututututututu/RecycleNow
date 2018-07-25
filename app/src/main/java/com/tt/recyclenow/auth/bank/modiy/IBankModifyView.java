@@ -8,4 +8,6 @@ import com.hzecool.core.base.TIBaseView;
 
 public interface IBankModifyView extends TIBaseView{
     void addOk(String msg);
+
+    void noBank(String msg);
 }

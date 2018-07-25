@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hzecool.core.base.TBaseActivity;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.bean.HelpBean;
@@ -29,10 +30,12 @@ public class HelpActivity extends TBaseActivity<IHelpView, HelpPresenter>
     @Override
     public void onLoadData(Object o) {
         List<HelpBean.DataBean> data = (List<HelpBean.DataBean>) o;
-        List<String> dataShow = new ArrayList<>();
-        for (HelpBean.DataBean datum : data) {
-            dataShow.add(datum.getTitle());
-            dataShow.add(datum.getCont());
+        List<MultiItemEntity> dataShow = new ArrayList<>();
+
+        for (int i = 0; i < data.size(); i++) {
+            Level0Item level0Item = new Level0Item((i + 1) + "、" + data.get(i).getTitle());
+            level0Item.addSubItem(new Level1Item(data.get(i).getCont()));
+            dataShow.add(level0Item);
         }
 
         helpAdapter.setNewData(dataShow);

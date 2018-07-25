@@ -229,6 +229,7 @@ public class AuthActivity extends TBaseActivity<IAuthView, AuthPresenter>
     @Override
     public void onAuthStatusOk(AuthStatusBean bean) {
         this.authStatusBean = bean;
+        updateView();
     }
 
     @Override

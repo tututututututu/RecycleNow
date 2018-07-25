@@ -1,5 +1,6 @@
 package com.tt.recyclenow.auth.idcard;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
@@ -8,9 +9,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.hzecool.common.utils.HandlerUtil;
 import com.hzecool.common.utils.ToastUtils;
+import com.hzecool.common.utils.Utils;
 import com.hzecool.core.base.TBaseActivity;
 import com.megvii.faceid.zzplatform.sdk.config.UserConfig;
 import com.megvii.faceid.zzplatform.sdk.listener.AccessCallBackListener;
@@ -21,6 +25,7 @@ import com.megvii.faceidiol.sdk.manager.IDCardDetectListener;
 import com.megvii.faceidiol.sdk.manager.IDCardManager;
 import com.megvii.faceidiol.sdk.manager.IDCardResult;
 import com.megvii.faceidiol.sdk.manager.UserDetectConfig;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.tt.recyclenow.R;
 import com.tt.recyclenow.auth.GenerateSign;
 import com.tt.recyclenow.bean.SFZFMBean;
@@ -120,7 +125,24 @@ public class IDCardActivity extends TBaseActivity<IIDCardView, IDCardPresenter>
         switch (v.getId()) {
             case R.id.rl_img:
             case R.id.rl_img1:
-                startSFZAuth();
+                RxPermissions rxPermissions = new RxPermissions(this);
+
+                rxPermissions.request(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                )
+                        .subscribe(aBoolean -> {
+                            if (aBoolean) {
+                                try {
+                                    startSFZAuth();
+                                }catch (Exception e){
+                                    ToastUtils.showShortToast(e.getMessage());
+                                }
+
+                            } else {
+                                Toast.makeText(Utils.getContext(), "没有获取到需要的权限", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 break;
             case R.id.tv_start:
                 if (TextUtils.isEmpty(etBank.getText().toString().trim())) {
@@ -147,7 +169,13 @@ public class IDCardActivity extends TBaseActivity<IIDCardView, IDCardPresenter>
 
                 @Override
                 public void initFailed(int resultCode, String resultMessage) {
-                    showAlertDlg("提示", resultMessage);
+                    HandlerUtil.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            showAlertDlg("提示", resultMessage);
+                        }
+                    });
+
                 }
             });
         }).start();
@@ -257,7 +285,7 @@ public class IDCardActivity extends TBaseActivity<IIDCardView, IDCardPresenter>
             params.put("zmcards", JSON.toJSONString(sfzmBean));
             params.put("fmcards", JSON.toJSONString(sfzfmBean));
 
-            showLoadingDialog(false,false,"识别中..");
+            showLoadingDialog(false, false, "识别中..");
             mPresenter.smAuth(params);
         } else if (i == 2000) {
             /**

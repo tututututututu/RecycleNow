@@ -1,7 +1,13 @@
 package com.tt.recyclenow.auth.person;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -159,7 +165,8 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
     }
 
     @OnClick({R.id.rl1, R.id.et1, R.id.rl2, R.id.et2, R.id.rl3, R.id.et3, R.id.rl5,
-            R.id.et5, R.id.rl6, R.id.et6, R.id.rl9, R.id.et9, R.id.tv_finish})
+            R.id.et5, R.id.rl6, R.id.et6, R.id.rl9, R.id.et9, R.id.tv_finish, R.id.rl8, R.id.rl11,
+            R.id.et8,R.id.et11})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl1:
@@ -189,8 +196,46 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
             case R.id.tv_finish:
                 mPresenter.upLoadData(wrapParams());
                 break;
+            case R.id.et8:
+            case R.id.rl8:
+                startActivityForResult(new Intent(
+                        Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 1);
+                break;
+            case R.id.et11:
+            case R.id.rl11:
+                startActivityForResult(new Intent(
+                        Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), 2);
+                break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            ContentResolver reContentResolverol = getContentResolver();
+            Uri contactData = data.getData();
+            @SuppressWarnings("deprecation")
+            Cursor cursor = managedQuery(contactData, null, null, null, null);
+            cursor.moveToFirst();
+            String username = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+            Cursor phone = reContentResolverol.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    null,
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId,
+                    null,
+                    null);
+            while (phone.moveToNext()) {
+                String usernumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                if (requestCode == 1) {
+                    et8.setText(usernumber);
+                } else if (requestCode == 2) {
+                    et11.setText(usernumber);
+                }
+            }
+
         }
     }
 
@@ -368,10 +413,10 @@ public class PersonInfoAuthActivity extends TBaseActivity<IPersonInfoAuth, Perso
     @Override
     public void reFillData(PersonAuthBean rep) {
         PersonAuthBean.DataBean data = rep.getData();
-        if (data!=null){
+        if (data != null) {
             et1.setText(data.getZn());
             et2.setText(data.getXl());
-            et3.setText(data.getBz1()+data.getBz2()+data.getBz3());
+            et3.setText(data.getBz1() + data.getBz2() + data.getBz3());
             et4.setText(data.getUserAddr());
             et5.setText(data.getJh());
             et6.setText(data.getQsgx());

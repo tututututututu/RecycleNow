@@ -29,22 +29,22 @@ public class HistoryAdapter extends BaseQuickAdapter<RecycleHistoryBean.DataBean
                 .setText(R.id.tv_4, TextUtils.isEmpty(item.getJktimes()) ? "----" : item.getJktimes())
                 .setText(R.id.tv_5, TextUtils.isEmpty(item.getEndtimes()) ? "----" : item.getEndtimes());
 
-        if (item.getTs().equals("0")){
-            helper.setText(R.id.tv_3,"新申请");
+        if (0 == item.getMark()) {
+            helper.setText(R.id.tv_3, "新申请");
             helper.setTextColor(R.id.tv_3, Color.BLUE);
-        }else if (item.getTs().equals("1")){
+        } else if (1 == item.getMark()) {
             helper.setText(R.id.tv_3, "通过");
             helper.setTextColor(R.id.tv_3, Color.GREEN);
-        }else if (item.getTs().equals("2")){
+        } else if (2 == item.getMark()) {
             helper.setText(R.id.tv_3, "未通过");
             helper.setTextColor(R.id.tv_3, Color.GRAY);
-        }else if (item.getTs().equals("3")){
+        } else if (3 == item.getMark()) {
             helper.setText(R.id.tv_3, "已完结");
             helper.setTextColor(R.id.tv_3, Color.GRAY);
-        }else if (item.getTs().equals("4")){
+        } else if (4 == item.getMark()) {
             helper.setText(R.id.tv_3, "取消");
             helper.setTextColor(R.id.tv_3, Color.GRAY);
-        }else if (item.getTs().equals("6")){
+        } else if (5 == item.getMark()) {
             helper.setText(R.id.tv_3, "审核中");
             helper.setTextColor(R.id.tv_3, Color.YELLOW);
         }

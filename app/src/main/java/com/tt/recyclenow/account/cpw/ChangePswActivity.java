@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +30,7 @@ public class ChangePswActivity extends TBaseActivity<IChangePswView, ChangePswPr
     @BindView(R.id.edt_loginName)
     ClearableEditText edtLoginName;
     @BindView(R.id.edt_code)
-    ClearableEditText edtCode;
+    EditText edtCode;
     @BindView(R.id.btn_getcode)
     CountDownButton btnGetcode;
     @BindView(R.id.edt_psw)
